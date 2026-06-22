@@ -1,0 +1,5 @@
+pyspark==3.5.1
+dbt-postgres==1.8.0
+requests==2.32.4
+pandas==3.0.0
+psycopg2-binary

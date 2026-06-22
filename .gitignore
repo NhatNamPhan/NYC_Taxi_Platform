@@ -1,0 +1,18 @@
+# Data directories (Parquet, CSV, etc.)
+data/
+*.parquet
+*.csv
+
+# Python environments and caches
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# IDE configs
+.vscode/
+.idea/
+.gemini/
