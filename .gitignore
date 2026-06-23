@@ -16,3 +16,7 @@ env/
 .vscode/
 .idea/
 .gemini/
+
+# Hadoop binaries for Windows local development
+hadoop/
+
