@@ -21,7 +21,7 @@ def main():
     
 
     spark.sparkContext.setLogLevel("WARN")
-    print("Spark Session đã được tạo khởi động thành công!")
+    print("Spark Session cho Silver Layer đã được tạo khởi động thành công!")
     
     input_path = os.path.join(project_root, "data", "bronze")
     
