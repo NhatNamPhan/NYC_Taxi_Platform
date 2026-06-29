@@ -1,6 +1,9 @@
 -- Staging model: stg_zones
--- Direct read from taxi zone lookup
+-- Đọc dữ liệu từ seed file taxi_zone_lookup
 
 SELECT
-    *
-FROM {{ source('gold', 'taxi_zone_lookup') }}
+   "LocationID" AS location_id,
+   "Borough" AS borough,
+   "Zone" AS zone,
+   "service_zone" AS service_zone
+FROM {{ ref('taxi_zone_lookup') }}
