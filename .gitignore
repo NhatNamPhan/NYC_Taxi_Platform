@@ -11,6 +11,7 @@ venv/
 env/
 .pytest_cache/
 .ipynb_checkpoints/
+.env
 
 # IDE configs
 .vscode/

@@ -40,13 +40,15 @@ def main():
         F.when((F.col("DOLocationID") >= 1) & (F.col("DOLocationID") <= 265), F.col("DOLocationID")).otherwise(F.lit(None))
     )
 
-    # 2. Điều kiện lọc loại bỏ các dòn bị lỗi (Outliers)
+    # 2. Điều kiện lọc loại bỏ các dòng bị lỗi (Outliers và lỗi đồng hồ)
     cleaned_condition = (
         (F.col("trip_distance") > 0) & (F.col("trip_distance") <= 500) &
         (F.col("fare_amount") > 0) & (F.col("fare_amount") < 1000) &
         (F.col("passenger_count") >= 1) & (F.col("passenger_count") <= 8) &
         (F.col("tip_amount") >= 0) &
-        (F.col("tpep_pickup_datetime").isNotNull())        
+        (F.col("tpep_pickup_datetime").isNotNull()) &
+        (F.col("tpep_pickup_datetime") >= "2024-01-01 00:00:00") &
+        (F.col("tpep_pickup_datetime") <= "2025-12-31 23:59:59")
     )
     
     df_cleaned = df_validated.filter(cleaned_condition)
