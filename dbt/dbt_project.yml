@@ -1,0 +1,30 @@
+name: 'nyc_taxi_platform'
+version: '1.0.0'
+config-version: 2
+
+#Profile này liên kết với dbt với profile.yml để kết nối DB
+profile: 'nyc_taxi_profile'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Cấu hình kiểu ghi dữ liệu (masterialized) cho các tầng thư mục
+models:
+  nyc_taxi_platform:
+    staging: 
+      +materialized: view         # Tầng Staging chỉ làm View để tối ưu dung lượng
+    dimensions:
+      +materialized: table        # Tầng Dimension làm bảng vật lý (Table)
+    facts: 
+      +materialized: table        # Tầng Fact làm bảng vật lý (Table)
+    marts:
+      +materialized: table        # Tầng Mart làm bảng vật lý phục vụ phân tích
+

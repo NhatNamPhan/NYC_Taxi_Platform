@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: gold
+    schema: gold
+    tables:
+      - name: trips # Bảng dữ liệu thô do Spark đẩy vào PostgreSQL
+      

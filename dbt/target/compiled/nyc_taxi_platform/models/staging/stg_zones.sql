@@ -6,4 +6,4 @@ SELECT
    "Borough" AS borough,
    "Zone" AS zone,
    "service_zone" AS service_zone
-FROM {{ ref('taxi_zone_lookup') }}
+FROM "nyc_taxi"."gold"."taxi_zone_lookup"

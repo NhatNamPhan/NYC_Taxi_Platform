@@ -9,7 +9,7 @@ SELECT
     ROUND(SUM(t.fare_amount)::NUMERIC, 2) AS total_fare,
     ROUND(SUM(t.tip_amount)::NUMERIC, 2) AS total_tips,
     ROUND(AVG(t.tip_percentage)::NUMERIC, 2) AS avg_tip_percentage
-FROM {{ ref('fact_trips') }} t
-JOIN {{ ref('dim_location') }} l ON t.pickup_location_id = l.location_id
+FROM "nyc_taxi"."gold"."fact_trips" t
+JOIN "nyc_taxi"."gold"."dim_location" l ON t.pickup_location_id = l.location_id
 GROUP BY 1, 2
 ORDER BY total_revenue DESC

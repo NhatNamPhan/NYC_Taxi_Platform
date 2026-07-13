@@ -1,4 +1,9 @@
--- Staging model: stg_trips
+
+  create view "nyc_taxi"."gold"."stg_trips__dbt_tmp"
+    
+    
+  as (
+    -- Staging model: stg_trips
 -- Đọc dữ liệu từ nguồn gold.trips và chuẩn hóa tên cột
 
 SELECT 
@@ -34,4 +39,5 @@ SELECT
     "trip_duration_min" AS trip_duration_min,
     "tip_percentage" AS tip_percentage,
     "speed_mph" AS speed_mph
-FROM {{ source('gold', 'trips') }}
+FROM "nyc_taxi"."gold"."trips"
+  );

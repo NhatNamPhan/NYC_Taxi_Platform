@@ -1,7 +1,7 @@
 -- Dimension model: dim_time
 -- Chi tiết hóa thời gian đón khách từ stg_trips
 
-{{ config(materialized='table') }}
+
 
 SELECT DISTINCT
     tpep_pickup_datetime AS datetime_id,
@@ -15,4 +15,4 @@ SELECT DISTINCT
         WHEN EXTRACT(DOW FROM tpep_pickup_datetime) IN (0, 6) THEN TRUE 
         ELSE FALSE 
     END AS is_weekend
-FROM {{ ref('stg_trips') }}
+FROM "nyc_taxi"."gold"."stg_trips"

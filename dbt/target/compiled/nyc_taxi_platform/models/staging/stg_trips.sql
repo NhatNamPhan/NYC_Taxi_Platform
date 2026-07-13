@@ -34,4 +34,4 @@ SELECT
     "trip_duration_min" AS trip_duration_min,
     "tip_percentage" AS tip_percentage,
     "speed_mph" AS speed_mph
-FROM {{ source('gold', 'trips') }}
+FROM "nyc_taxi"."gold"."trips"
