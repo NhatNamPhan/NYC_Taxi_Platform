@@ -7,7 +7,7 @@ SELECT
     COUNT(*) AS trip_count,
     ROUND(AVG(t.total_amount)::NUMERIC, 2) AS avg_total_amount,
     ROUND(AVG(t.trip_distance)::NUMERIC, 2) AS avg_trip_distance
-FROM {{ ref('fact_trips') }} t
-LEFT JOIN {{ ref('dim_location') }} l ON t.pickup_location_id = l.location_id
+FROM "nyc_taxi"."gold"."fact_trips" t
+LEFT JOIN "nyc_taxi"."gold"."dim_location" l ON t.pickup_location_id = l.location_id
 GROUP BY 1, 2
 ORDER BY 1, 2
