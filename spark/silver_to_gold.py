@@ -3,22 +3,25 @@ import sys
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 from dotenv import load_dotenv
+import platform
 
 def main():
     load_dotenv()
     # 1. Tự động xác định project root và cấu hình  HADOOP HOME cho Windows
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    
-    hadoop_home = os.path.join(project_root, "hadoop")
-    os.environ["HADOOP_HOME"] = hadoop_home
-    os.environ["PATH"] += os.pathsep + os.path.join(hadoop_home, "bin")
+    spark_local_dir = "E:\\spark-temp" if platform.system() == "Windows" else "/tmp/spark-temp"
+
+    if platform.system() == "Windows":
+        hadoop_home = os.path.join(project_root, "hadoop")
+        os.environ["HADOOP_HOME"] = hadoop_home
+        os.environ["PATH"] += os.pathsep + os.path.join(hadoop_home, "bin")
     
     # 2. Khởi động Spark Session với cấu hình tối ưu 8GB RAM
     spark = (SparkSession.builder
         .appName("NYC Taxi Silver to Gold")
         .config("spark.driver.memory", "8g")
-        .config("spark.local.dir", "E:\\spark-temp")
+        .config("spark.local.dir", spark_local_dir)
         .config("spark.sql.session.timeZone", "UTC")
         .config("spark.jars.packages", "org.postgresql:postgresql:42.7.3")
         .config("spark.driver.extraJavaOptions", "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED")

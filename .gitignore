@@ -21,3 +21,4 @@ env/
 # Hadoop binaries for Windows local development
 hadoop/
 
+.log

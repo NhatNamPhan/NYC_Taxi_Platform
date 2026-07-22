@@ -894,3 +894,1434 @@ drop table if exists "nyc_taxi"."gold"."mart_monthly_trends__dbt_backup" cascade
 [0m11:01:40.691591 [debug] [MainThread]: Command `dbt run` succeeded at 11:01:40.691591 after 1007.51 seconds
 [0m11:01:40.693593 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A31F8DD310>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A31F8DCED0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A31F8DCC10>]}
 [0m11:01:40.695595 [debug] [MainThread]: Flushing usage events
+==================== 2026-07-22T03:49:50.097418Z | 019f87f1-ab6a-7d32-a943-c2a207f9f157 ====================
+03:49:50.097616 [info ]: dbt-core 2.0.0-alpha.5
+03:49:50.116678 [info ]: Started loading project
+03:49:50.123810 [info ]: Loading profiles.yml
+03:49:50.139479 [info ]: Finished loading project [  0.02s]
+03:49:50.139590 [error]: [SerializationError (dbt1013)]: YAML error: did not find expected ',' or '}' at line 7 column 41, while parsing a flow mapping at line 7 column 14
+  --> ./profiles.yml:7:41
+03:49:51.547036 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error [1.4s]
+==================== 2026-07-22T03:52:53.876256Z | 019f87f4-795f-75c0-a7f6-e0d5f62b7a33 ====================
+03:52:53.876436 [info ]: dbt-core 2.0.0-alpha.5
+03:52:53.876681 [info ]: Started loading project
+03:52:53.883567 [info ]: Loading profiles.yml
+03:52:53.886677 [info ]: Finished loading project [  0.01s]
+03:52:53.886816 [error]: [SerializationError (dbt1013)]: YAML error: did not find expected ',' or '}' at line 7 column 41, while parsing a flow mapping at line 7 column 14
+  --> ./profiles.yml:7:41
+03:52:55.193066 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error [1.3s]
+==================== 2026-07-22T04:04:34.144823Z | 019f87ff-28c8-7111-9599-21d84b630126 ====================
+04:04:34.144985 [info ]: dbt-core 2.0.0-alpha.5
+04:04:34.145249 [info ]: Started loading project
+04:04:34.149096 [info ]: Loading profiles.yml
+04:04:34.151993 [info ]: Finished loading project [  0.01s]
+04:04:34.152068 [error]: [InvalidConfig (dbt1005)]: Failed to parse profiles.yml: password: invalid type: integer `1234`, expected a string at line 1 column 1
+04:04:35.423135 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error [1.3s]
+==================== 2026-07-22T04:04:56.013083Z | 019f87ff-7e38-76d0-8086-513032e7b506 ====================
+04:04:56.013361 [info ]: dbt-core 2.0.0-alpha.5
+04:04:56.013791 [info ]: Started loading project
+04:04:56.018396 [info ]: Loading profiles.yml
+04:04:56.021419 [info ]: Finished loading project [  0.01s]
+04:04:56.021486 [error]: [InvalidConfig (dbt1005)]: Failed to parse profiles.yml: password: invalid type: integer `1234`, expected a string at line 1 column 1
+04:04:56.569777 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error [556ms]
+==================== 2026-07-22T04:05:13.233611Z | 019f87ff-c180-7790-8d6f-eb95e90a7604 ====================
+04:05:13.233812 [info ]: dbt-core 2.0.0-alpha.5
+04:05:13.234099 [info ]: Started loading project
+04:05:13.238560 [info ]: Loading profiles.yml
+04:05:13.247719 [info ]: Finished loading project [  0.01s]
+04:05:13.247798 [error]: [InvalidConfig (dbt1005)]: Configuration Error: The 'postgres' adapter is not yet supported by dbt Fusion. Supported adapters: snowflake, bigquery, databricks, redshift, duckdb, salesforce, clickhouse. To use an experimental adapter, set the environment variable DBT_ALLOW_EXPERIMENTAL_ADAPTERS=true. Note that experimental adapters may be unstable and are not yet recommended for production use.
+04:05:13.751403 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error [517ms]
+==================== 2026-07-22T04:05:25.026194Z | 019f87ff-ef95-7021-95e7-f93e2438b649 ====================
+04:05:25.026379 [info ]: dbt-core 2.0.0-alpha.5
+04:05:25.026736 [info ]: Started loading project
+04:05:25.030594 [info ]: Loading profiles.yml
+04:05:25.040378 [debug]:    Started loading packages
+04:05:25.089863 [debug]:     Loaded [  0.05s] packages
+04:05:25.090750 [info ]: Finished loading project [  0.06s]
+04:05:25.101169 [info ]: Started parsing
+04:05:25.147387 [debug]: Finished parsing models/staging/sources.yml [  0.00s]
+04:05:25.175529 [debug]: Finished parsing models/dimensions/dim_location.sql [  0.01s]
+04:05:25.180538 [debug]: Finished parsing models/dimensions/dim_time.sql [  0.00s]
+04:05:25.184967 [debug]: Finished parsing models/facts/fact_trips.sql [  0.00s]
+04:05:25.188872 [debug]: Finished parsing models/marts/mart_hourly_demand.sql [  0.00s]
+04:05:25.192457 [debug]: Finished parsing models/marts/mart_monthly_trends.sql [  0.00s]
+04:05:25.197280 [debug]: Finished parsing models/marts/mart_revenue_by_zone.sql [  0.00s]
+04:05:25.202441 [debug]: Finished parsing models/staging/stg_trips.sql [  0.01s]
+04:05:25.206230 [debug]: Finished parsing models/staging/stg_zones.sql [  0.00s]
+04:05:25.239795 [info ]: Finished parsing [  0.14s]
+04:05:25.258191 [info ]: Started scheduling
+04:05:25.258503 [info ]: Finished scheduling [  0.00s]
+04:05:25.260100 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "nyc_taxi", schema: "gold", table: "taxi_zone_lookup" }) and interval: None
+04:05:25.264389 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "nyc_taxi", schema: "gold", table: "trips" }) and interval: None
+04:05:25.270940 [info ]: Started building task graph
+04:05:25.271287 [info ]: Finished building task graph [  0.00s]
+04:05:27.468024 [error]: [DbDriverFailed (dbt1308)]: Failed to create schema 'gold' in database 'nyc_taxi' in remote for model.nyc_taxi_platform.stg_zones: [libpq] Failed to connect: connection to server at "host.docker.internal" (192.168.65.254), port 5433 failed: FATAL:  password authentication failed for user "postgres"
+
+04:05:27.637766 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error for target 'dev' [2.6s]
+Processed: 8 models
+==================== 2026-07-22T04:07:39.096514Z | 019f8801-fb4a-72d1-a320-edd952b22acd ====================
+04:07:39.096738 [info ]: dbt-core 2.0.0-alpha.5
+04:07:39.097117 [info ]: Started loading project
+04:07:39.101448 [info ]: Loading profiles.yml
+04:07:39.104418 [info ]: Finished loading project [  0.01s]
+04:07:39.104519 [error]: [InvalidConfig (dbt1005)]: Failed to parse profiles.yml: password: invalid type: integer `1234`, expected a string at line 1 column 1
+04:07:39.748801 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error [652ms]
+==================== 2026-07-22T04:10:42.251877Z | 019f8804-c6bf-7d81-ac13-d752bd5cdc26 ====================
+04:10:42.252051 [info ]: dbt-core 2.0.0-alpha.5
+04:10:42.252299 [info ]: Started loading project
+04:10:42.255911 [info ]: Loading profiles.yml
+04:10:42.258256 [info ]: Finished loading project [  0.01s]
+04:10:42.258331 [error]: [InvalidConfig (dbt1005)]: Failed to parse profiles.yml: password: invalid type: integer `1234`, expected a string at line 1 column 1
+04:10:43.607035 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error [1.4s]
+[0m04:11:36.143335 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef7d8ca70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef5db57c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef59a5f70>]}
+
+
+============================== 04:11:36.152539 | 3c603e42-c8c1-406f-a9f0-062e9bb16ade ==============================
+[0m04:11:36.152539 [info ] [MainThread]: Running with dbt=1.12.0
+[0m04:11:36.154680 [debug] [MainThread]: running dbt with arguments {'log_cache_events': 'False', 'warn_error': 'None', 'send_anonymous_usage_stats': 'True', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'partial_parse': 'True', 'invocation_command': 'dbt run --profiles-dir .', 'log_format': 'default', 'debug': 'False', 'write_json': 'True', 'use_experimental_parser': 'False', 'quiet': 'False', 'empty': 'False', 'fail_fast': 'False', 'maximum_seed_size_mib': '1', 'indirect_selection': 'eager', 'introspect': 'True', 'cache_selected_only': 'False', 'printer_width': '80', 'profiles_dir': '.', 'use_colors': 'True', 'hints_enabled': 'True', 'log_path': '/opt/airflow/dbt/logs', 'static_parser': 'True', 'target_path': 'None', 'version_check': 'True'}
+[0m04:11:36.430257 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef4dc4710>]}
+[0m04:11:36.548583 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef4cc4770>]}
+[0m04:11:36.552023 [info ] [MainThread]: Registered adapter: postgres=1.8.0
+[0m04:11:36.708814 [debug] [MainThread]: checksum: e646dd1cc3462da1039f3b074a499efaa125bbe8aeb19c1af98c84a3d9c2643c, vars: {}, profile: nyc_taxi_profile, target: dev, version: 1.12.0
+[0m04:11:36.899283 [info ] [MainThread]: Unable to do partial parsing because of a version mismatch
+[0m04:11:36.901444 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef40a0d10>]}
+[0m04:11:39.555256 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef3eb3920>]}
+[0m04:11:39.758345 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m04:11:39.767407 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m04:11:39.791922 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m04:11:39.863175 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef2baf1a0>]}
+[0m04:11:39.864952 [info ] [MainThread]: Found 8 models, 1 seed, 1 source, 474 macros
+[0m04:11:39.866917 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef2ae5bb0>]}
+[0m04:11:39.871814 [info ] [MainThread]: 
+[0m04:11:39.875085 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m04:11:39.877347 [info ] [MainThread]: 
+[0m04:11:39.888204 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m04:11:39.909129 [debug] [ThreadPool]: Acquiring new postgres connection 'list_nyc_taxi'
+[0m04:11:39.976744 [debug] [ThreadPool]: Using postgres connection "list_nyc_taxi"
+[0m04:11:39.978494 [debug] [ThreadPool]: On list_nyc_taxi: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "connection_name": "list_nyc_taxi"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m04:11:39.979795 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m04:11:40.036786 [debug] [ThreadPool]: SQL status: SELECT 5 in 0.057 seconds
+[0m04:11:40.039440 [debug] [ThreadPool]: On list_nyc_taxi: Close
+[0m04:11:40.045551 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_nyc_taxi, now list_nyc_taxi_gold)
+[0m04:11:40.054669 [debug] [ThreadPool]: Using postgres connection "list_nyc_taxi_gold"
+[0m04:11:40.056145 [debug] [ThreadPool]: On list_nyc_taxi_gold: BEGIN
+[0m04:11:40.058167 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m04:11:40.111200 [debug] [ThreadPool]: SQL status: BEGIN in 0.053 seconds
+[0m04:11:40.113131 [debug] [ThreadPool]: Using postgres connection "list_nyc_taxi_gold"
+[0m04:11:40.114811 [debug] [ThreadPool]: On list_nyc_taxi_gold: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "connection_name": "list_nyc_taxi_gold"} */
+select
+      'nyc_taxi' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'gold'
+    union all
+    select
+      'nyc_taxi' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'gold'
+    union all
+    select
+      'nyc_taxi' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'gold'
+  
+[0m04:11:40.133660 [debug] [ThreadPool]: SQL status: SELECT 10 in 0.017 seconds
+[0m04:11:40.136639 [debug] [ThreadPool]: On list_nyc_taxi_gold: ROLLBACK
+[0m04:11:40.138991 [debug] [ThreadPool]: On list_nyc_taxi_gold: Close
+[0m04:11:40.162898 [debug] [MainThread]: Using postgres connection "master"
+[0m04:11:40.165371 [debug] [MainThread]: On master: BEGIN
+[0m04:11:40.167290 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m04:11:40.229407 [debug] [MainThread]: SQL status: BEGIN in 0.062 seconds
+[0m04:11:40.231237 [debug] [MainThread]: Using postgres connection "master"
+[0m04:11:40.232819 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m04:11:40.258912 [debug] [MainThread]: SQL status: SELECT 2 in 0.025 seconds
+[0m04:11:40.262510 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef4d7fda0>]}
+[0m04:11:40.264062 [debug] [MainThread]: On master: ROLLBACK
+[0m04:11:40.266397 [debug] [MainThread]: Using postgres connection "master"
+[0m04:11:40.267975 [debug] [MainThread]: On master: BEGIN
+[0m04:11:40.270706 [debug] [MainThread]: SQL status: BEGIN in 0.001 seconds
+[0m04:11:40.272198 [debug] [MainThread]: On master: COMMIT
+[0m04:11:40.273746 [debug] [MainThread]: Using postgres connection "master"
+[0m04:11:40.275433 [debug] [MainThread]: On master: COMMIT
+[0m04:11:40.277752 [debug] [MainThread]: SQL status: COMMIT in 0.001 seconds
+[0m04:11:40.279365 [debug] [MainThread]: On master: Close
+[0m04:11:40.288048 [debug] [Thread-1 (]: Began running node model.nyc_taxi_platform.stg_trips
+[0m04:11:40.288804 [debug] [Thread-2 (]: Began running node model.nyc_taxi_platform.stg_zones
+[0m04:11:40.290638 [info ] [Thread-1 (]: 1 of 8 START sql view model gold.stg_trips ..................................... [RUN]
+[0m04:11:40.293106 [info ] [Thread-2 (]: 2 of 8 START sql view model gold.stg_zones ..................................... [RUN]
+[0m04:11:40.295347 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_nyc_taxi_gold, now model.nyc_taxi_platform.stg_trips)
+[0m04:11:40.297765 [debug] [Thread-2 (]: Acquiring new postgres connection 'model.nyc_taxi_platform.stg_zones'
+[0m04:11:40.299859 [debug] [Thread-1 (]: Began compiling node model.nyc_taxi_platform.stg_trips
+[0m04:11:40.301640 [debug] [Thread-2 (]: Began compiling node model.nyc_taxi_platform.stg_zones
+[0m04:11:40.313918 [debug] [Thread-1 (]: Writing injected SQL for node "model.nyc_taxi_platform.stg_trips"
+[0m04:11:40.317189 [debug] [Thread-2 (]: Writing injected SQL for node "model.nyc_taxi_platform.stg_zones"
+[0m04:11:40.335793 [debug] [Thread-1 (]: Began executing node model.nyc_taxi_platform.stg_trips
+[0m04:11:40.336622 [debug] [Thread-2 (]: Began executing node model.nyc_taxi_platform.stg_zones
+[0m04:11:40.411665 [debug] [Thread-1 (]: Writing runtime sql for node "model.nyc_taxi_platform.stg_trips"
+[0m04:11:40.412173 [debug] [Thread-2 (]: Writing runtime sql for node "model.nyc_taxi_platform.stg_zones"
+[0m04:11:40.429188 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:11:40.430333 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:11:40.432224 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: BEGIN
+[0m04:11:40.434011 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: BEGIN
+[0m04:11:40.435694 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m04:11:40.437255 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m04:11:40.494938 [debug] [Thread-2 (]: SQL status: BEGIN in 0.059 seconds
+[0m04:11:40.496489 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:11:40.498281 [debug] [Thread-1 (]: SQL status: BEGIN in 0.061 seconds
+[0m04:11:40.498914 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_zones"} */
+
+  create view "nyc_taxi"."gold"."stg_zones__dbt_tmp"
+    
+    
+  as (
+    -- Staging model: stg_zones
+-- Đọc dữ liệu từ seed file taxi_zone_lookup
+
+SELECT
+   "LocationID" AS location_id,
+   "Borough" AS borough,
+   "Zone" AS zone,
+   "service_zone" AS service_zone
+FROM "nyc_taxi"."gold"."taxi_zone_lookup"
+  );
+[0m04:11:40.500408 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:11:40.504194 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_trips"} */
+
+  create view "nyc_taxi"."gold"."stg_trips__dbt_tmp"
+    
+    
+  as (
+    -- Staging model: stg_trips
+-- Đọc dữ liệu từ nguồn gold.trips và chuẩn hóa tên cột
+
+SELECT 
+    -- Tạo mã ID chuyến đi duy nhất (do dữ liệu thô không có khóa chính)
+    md5(CONCAT(
+        COALESCE(CAST("VendorID" AS VARCHAR), ''),
+        COALESCE(CAST("tpep_pickup_datetime" AS VARCHAR), ''),
+        COALESCE(CAST("PULocationID" AS VARCHAR), '')
+    )) AS trip_id,
+
+    "VendorID" AS vendor_id,
+    "tpep_pickup_datetime" AS tpep_pickup_datetime,
+    "tpep_dropoff_datetime" AS tpep_dropoff_datetime,
+    "passenger_count" AS passenger_count,
+    "trip_distance" AS trip_distance,
+    "RatecodeID" AS ratecode_id,
+    "store_and_fwd_flag" AS store_and_fwd_flag,
+    "PULocationID" AS pickup_location_id,
+    "DOLocationID" AS dropoff_location_id,
+    "payment_type" AS payment_type,
+    "fare_amount" AS fare_amount,
+    "extra" AS extra,
+    "mta_tax" AS mta_tax,
+    "tip_amount" AS tip_amount,
+    "tolls_amount" AS tolls_amount,
+    "improvement_surcharge" AS improvement_surcharge,
+    "total_amount" AS total_amount,
+    "congestion_surcharge" AS congestion_surcharge,
+    "Airport_fee" AS airport_fee,
+    "pickup_borough" AS pickup_borough,
+    "pickup_zone_name" AS pickup_zone_name,
+    "service_zone" AS service_zone,
+    "trip_duration_min" AS trip_duration_min,
+    "tip_percentage" AS tip_percentage,
+    "speed_mph" AS speed_mph
+FROM "nyc_taxi"."gold"."trips"
+  );
+[0m04:11:40.600398 [debug] [Thread-2 (]: SQL status: CREATE VIEW in 0.098 seconds
+[0m04:11:40.609781 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 0.103 seconds
+[0m04:11:40.611188 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:11:40.615568 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:11:40.617297 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_zones"} */
+alter table "nyc_taxi"."gold"."stg_zones" rename to "stg_zones__dbt_backup"
+[0m04:11:40.619069 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_trips"} */
+alter table "nyc_taxi"."gold"."stg_trips" rename to "stg_trips__dbt_backup"
+[0m04:11:40.623535 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m04:11:40.624692 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m04:11:40.628620 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:11:40.632995 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:11:40.634713 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_zones"} */
+alter table "nyc_taxi"."gold"."stg_zones__dbt_tmp" rename to "stg_zones"
+[0m04:11:40.636193 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_trips"} */
+alter table "nyc_taxi"."gold"."stg_trips__dbt_tmp" rename to "stg_trips"
+[0m04:11:40.639443 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.001 seconds
+[0m04:11:40.640596 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.001 seconds
+[0m04:11:40.694404 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: COMMIT
+[0m04:11:40.695291 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: COMMIT
+[0m04:11:40.696774 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:11:40.698554 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:11:40.700207 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: COMMIT
+[0m04:11:40.702330 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: COMMIT
+[0m04:11:40.707136 [debug] [Thread-2 (]: SQL status: COMMIT in 0.003 seconds
+[0m04:11:40.708363 [debug] [Thread-1 (]: SQL status: COMMIT in 0.003 seconds
+[0m04:11:40.718295 [debug] [Thread-2 (]: Applying DROP to: "nyc_taxi"."gold"."stg_zones__dbt_backup"
+[0m04:11:40.723782 [debug] [Thread-1 (]: Applying DROP to: "nyc_taxi"."gold"."stg_trips__dbt_backup"
+[0m04:11:40.733433 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:11:40.735687 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:11:40.737429 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_zones"} */
+drop view if exists "nyc_taxi"."gold"."stg_zones__dbt_backup" cascade
+[0m04:11:40.739137 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_trips"} */
+drop view if exists "nyc_taxi"."gold"."stg_trips__dbt_backup" cascade
+[0m04:11:40.751727 [debug] [Thread-2 (]: SQL status: DROP VIEW in 0.010 seconds
+[0m04:11:40.752388 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.010 seconds
+[0m04:11:40.756869 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: Close
+[0m04:11:40.760170 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: Close
+[0m04:11:40.764812 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef787a300>]}
+[0m04:11:40.767362 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef1f3da00>]}
+[0m04:11:40.769908 [info ] [Thread-2 (]: 2 of 8 OK created sql view model gold.stg_zones ................................ [[32mCREATE VIEW[0m in 0.47s]
+[0m04:11:40.773065 [info ] [Thread-1 (]: 1 of 8 OK created sql view model gold.stg_trips ................................ [[32mCREATE VIEW[0m in 0.47s]
+[0m04:11:40.775811 [debug] [Thread-2 (]: Finished running node model.nyc_taxi_platform.stg_zones
+[0m04:11:40.778094 [debug] [Thread-1 (]: Finished running node model.nyc_taxi_platform.stg_trips
+[0m04:11:40.780878 [debug] [Thread-4 (]: Began running node model.nyc_taxi_platform.dim_location
+[0m04:11:40.783425 [debug] [Thread-2 (]: Began running node model.nyc_taxi_platform.dim_time
+[0m04:11:40.784089 [debug] [Thread-3 (]: Began running node model.nyc_taxi_platform.fact_trips
+[0m04:11:40.785958 [info ] [Thread-4 (]: 3 of 8 START sql table model gold.dim_location ................................. [RUN]
+[0m04:11:40.788401 [info ] [Thread-2 (]: 4 of 8 START sql table model gold.dim_time ..................................... [RUN]
+[0m04:11:40.791118 [info ] [Thread-3 (]: 5 of 8 START sql table model gold.fact_trips ................................... [RUN]
+[0m04:11:40.793908 [debug] [Thread-4 (]: Acquiring new postgres connection 'model.nyc_taxi_platform.dim_location'
+[0m04:11:40.795951 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.nyc_taxi_platform.stg_zones, now model.nyc_taxi_platform.dim_time)
+[0m04:11:40.798127 [debug] [Thread-3 (]: Acquiring new postgres connection 'model.nyc_taxi_platform.fact_trips'
+[0m04:11:40.800412 [debug] [Thread-4 (]: Began compiling node model.nyc_taxi_platform.dim_location
+[0m04:11:40.802640 [debug] [Thread-2 (]: Began compiling node model.nyc_taxi_platform.dim_time
+[0m04:11:40.804269 [debug] [Thread-3 (]: Began compiling node model.nyc_taxi_platform.fact_trips
+[0m04:11:40.808413 [debug] [Thread-4 (]: Writing injected SQL for node "model.nyc_taxi_platform.dim_location"
+[0m04:11:40.814038 [debug] [Thread-2 (]: Writing injected SQL for node "model.nyc_taxi_platform.dim_time"
+[0m04:11:40.819551 [debug] [Thread-3 (]: Writing injected SQL for node "model.nyc_taxi_platform.fact_trips"
+[0m04:11:40.838670 [debug] [Thread-2 (]: Began executing node model.nyc_taxi_platform.dim_time
+[0m04:11:40.839948 [debug] [Thread-3 (]: Began executing node model.nyc_taxi_platform.fact_trips
+[0m04:11:40.848204 [debug] [Thread-4 (]: Began executing node model.nyc_taxi_platform.dim_location
+[0m04:11:40.904681 [debug] [Thread-3 (]: Writing runtime sql for node "model.nyc_taxi_platform.fact_trips"
+[0m04:11:40.896300 [debug] [Thread-2 (]: Writing runtime sql for node "model.nyc_taxi_platform.dim_time"
+[0m04:11:40.912363 [debug] [Thread-4 (]: Writing runtime sql for node "model.nyc_taxi_platform.dim_location"
+[0m04:11:40.932950 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:11:40.935113 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:11:40.936282 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: BEGIN
+[0m04:11:40.936892 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:11:40.938852 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: BEGIN
+[0m04:11:40.942291 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m04:11:40.944165 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: BEGIN
+[0m04:11:40.945874 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m04:11:40.948593 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m04:11:41.018662 [debug] [Thread-2 (]: SQL status: BEGIN in 0.076 seconds
+[0m04:11:41.020967 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:11:41.023175 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_time"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."dim_time__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Dimension model: dim_time
+-- Chi tiết hóa thời gian đón khách từ stg_trips
+
+
+
+SELECT DISTINCT
+    tpep_pickup_datetime AS datetime_id,
+    EXTRACT(YEAR FROM tpep_pickup_datetime) AS year,
+    EXTRACT(MONTH FROM tpep_pickup_datetime) AS month,
+    EXTRACT(DAY FROM tpep_pickup_datetime) AS day,
+    EXTRACT(HOUR FROM tpep_pickup_datetime) AS hour,
+    EXTRACT(DOW FROM tpep_pickup_datetime) AS day_of_week,
+    TO_CHAR(tpep_pickup_datetime, 'FMDay') AS day_name,
+    CASE 
+        WHEN EXTRACT(DOW FROM tpep_pickup_datetime) IN (0, 6) THEN TRUE 
+        ELSE FALSE 
+    END AS is_weekend
+FROM "nyc_taxi"."gold"."stg_trips"
+  );
+  
+[0m04:11:41.030225 [debug] [Thread-4 (]: SQL status: BEGIN in 0.084 seconds
+[0m04:11:41.032008 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:11:41.033708 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_location"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."dim_location__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Dimension model: dim_location
+-- Unique locations with zone and borough info
+
+SELECT
+    location_id,
+    zone,
+    borough,
+    service_zone
+FROM "nyc_taxi"."gold"."stg_zones"
+  );
+  
+[0m04:11:41.058477 [debug] [Thread-4 (]: SQL status: SELECT 265 in 0.023 seconds
+[0m04:11:41.083703 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:11:41.111320 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_location"} */
+alter table "nyc_taxi"."gold"."dim_location" rename to "dim_location__dbt_backup"
+[0m04:11:41.129862 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m04:11:41.144070 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:11:41.154502 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_location"} */
+alter table "nyc_taxi"."gold"."dim_location__dbt_tmp" rename to "dim_location"
+[0m04:11:41.169020 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.009 seconds
+[0m04:11:41.185232 [debug] [Thread-3 (]: SQL status: BEGIN in 0.237 seconds
+[0m04:11:41.210461 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:11:41.204143 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: COMMIT
+[0m04:11:41.214084 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.fact_trips"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."fact_trips__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Fact model: fact_trips
+-- Core trip metrics joined with dimension keys
+
+SELECT
+    trip_id,
+    pickup_location_id,
+    dropoff_location_id,
+    tpep_pickup_datetime  AS pickup_datetime,
+    tpep_dropoff_datetime AS dropoff_datetime,
+    total_amount,
+    tip_amount,
+    fare_amount,
+    trip_distance,
+    trip_duration_min,
+    tip_percentage
+FROM "nyc_taxi"."gold"."stg_trips"
+  );
+  
+[0m04:11:41.218867 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:11:41.235859 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: COMMIT
+[0m04:11:41.271423 [debug] [Thread-4 (]: SQL status: COMMIT in 0.031 seconds
+[0m04:11:41.291510 [debug] [Thread-4 (]: Applying DROP to: "nyc_taxi"."gold"."dim_location__dbt_backup"
+[0m04:11:41.309108 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:11:41.313401 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_location"} */
+drop table if exists "nyc_taxi"."gold"."dim_location__dbt_backup" cascade
+[0m04:11:41.383925 [debug] [Thread-4 (]: SQL status: DROP TABLE in 0.067 seconds
+[0m04:11:41.450250 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: Close
+[0m04:11:41.465425 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef1f13ec0>]}
+[0m04:11:41.475786 [info ] [Thread-4 (]: 3 of 8 OK created sql table model gold.dim_location ............................ [[32mSELECT 265[0m in 0.67s]
+[0m04:11:41.485311 [debug] [Thread-4 (]: Finished running node model.nyc_taxi_platform.dim_location
+[0m04:13:22.790148 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71e764230>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71ef65340>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b720b249e0>]}
+
+
+============================== 04:13:22.799783 | 8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909 ==============================
+[0m04:13:22.799783 [info ] [MainThread]: Running with dbt=1.12.0
+[0m04:13:22.802132 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'static_parser': 'True', 'target_path': 'None', 'log_path': '/opt/airflow/dbt/logs', 'introspect': 'True', 'log_format': 'default', 'use_experimental_parser': 'False', 'no_print': 'None', 'send_anonymous_usage_stats': 'True', 'partial_parse': 'True', 'use_colors': 'True', 'indirect_selection': 'eager', 'quiet': 'False', 'log_cache_events': 'False', 'maximum_seed_size_mib': '1', 'write_json': 'True', 'hints_enabled': 'True', 'printer_width': '80', 'fail_fast': 'False', 'warn_error': 'None', 'cache_selected_only': 'False', 'empty': 'False', 'debug': 'False', 'invocation_command': 'dbt run --profiles-dir .', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'profiles_dir': '.'}
+[0m04:13:23.102665 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71df7ee40>]}
+[0m04:13:23.241215 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71e05b410>]}
+[0m04:13:23.246920 [info ] [MainThread]: Registered adapter: postgres=1.8.0
+[0m04:13:23.446436 [debug] [MainThread]: checksum: e646dd1cc3462da1039f3b074a499efaa125bbe8aeb19c1af98c84a3d9c2643c, vars: {}, profile: nyc_taxi_profile, target: dev, version: 1.12.0
+[0m04:13:23.852654 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m04:13:23.856496 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m04:13:23.860988 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m04:13:23.876840 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71df75880>]}
+[0m04:13:24.171673 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m04:13:24.178993 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m04:13:24.204077 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m04:13:24.245203 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71d18ce30>]}
+[0m04:13:24.249519 [info ] [MainThread]: Found 8 models, 1 seed, 1 source, 474 macros
+[0m04:13:24.261896 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71e075430>]}
+[0m04:13:24.266592 [info ] [MainThread]: 
+[0m04:13:24.269246 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m04:13:24.272398 [info ] [MainThread]: 
+[0m04:13:24.278052 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m04:13:24.285909 [debug] [ThreadPool]: Acquiring new postgres connection 'list_nyc_taxi'
+[0m04:13:24.348972 [debug] [ThreadPool]: Using postgres connection "list_nyc_taxi"
+[0m04:13:24.351209 [debug] [ThreadPool]: On list_nyc_taxi: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "connection_name": "list_nyc_taxi"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m04:13:24.352871 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m04:13:26.611205 [debug] [ThreadPool]: SQL status: SELECT 5 in 2.258 seconds
+[0m04:13:26.613966 [debug] [ThreadPool]: On list_nyc_taxi: Close
+[0m04:13:26.618164 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_nyc_taxi, now list_nyc_taxi_gold)
+[0m04:13:26.627878 [debug] [ThreadPool]: Using postgres connection "list_nyc_taxi_gold"
+[0m04:13:26.629645 [debug] [ThreadPool]: On list_nyc_taxi_gold: BEGIN
+[0m04:13:26.631146 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m04:13:26.681467 [debug] [ThreadPool]: SQL status: BEGIN in 0.050 seconds
+[0m04:13:26.683362 [debug] [ThreadPool]: Using postgres connection "list_nyc_taxi_gold"
+[0m04:13:26.685095 [debug] [ThreadPool]: On list_nyc_taxi_gold: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "connection_name": "list_nyc_taxi_gold"} */
+select
+      'nyc_taxi' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'gold'
+    union all
+    select
+      'nyc_taxi' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'gold'
+    union all
+    select
+      'nyc_taxi' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'gold'
+  
+[0m04:13:26.841107 [debug] [ThreadPool]: SQL status: SELECT 10 in 0.154 seconds
+[0m04:13:26.849590 [debug] [ThreadPool]: On list_nyc_taxi_gold: ROLLBACK
+[0m04:13:26.856876 [debug] [ThreadPool]: On list_nyc_taxi_gold: Close
+[0m04:13:26.873245 [debug] [MainThread]: Using postgres connection "master"
+[0m04:13:26.875447 [debug] [MainThread]: On master: BEGIN
+[0m04:13:26.877418 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m04:13:26.937665 [debug] [MainThread]: SQL status: BEGIN in 0.060 seconds
+[0m04:13:26.939335 [debug] [MainThread]: Using postgres connection "master"
+[0m04:13:26.940867 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v', 'm')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m04:13:27.029878 [debug] [MainThread]: SQL status: SELECT 2 in 0.088 seconds
+[0m04:13:27.035218 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b7206ee090>]}
+[0m04:13:27.037643 [debug] [MainThread]: On master: ROLLBACK
+[0m04:13:27.044174 [debug] [MainThread]: Using postgres connection "master"
+[0m04:13:27.046617 [debug] [MainThread]: On master: BEGIN
+[0m04:13:27.051610 [debug] [MainThread]: SQL status: BEGIN in 0.002 seconds
+[0m04:13:27.054150 [debug] [MainThread]: On master: COMMIT
+[0m04:13:27.056942 [debug] [MainThread]: Using postgres connection "master"
+[0m04:13:27.059061 [debug] [MainThread]: On master: COMMIT
+[0m04:13:27.063080 [debug] [MainThread]: SQL status: COMMIT in 0.001 seconds
+[0m04:13:27.064930 [debug] [MainThread]: On master: Close
+[0m04:13:27.073740 [debug] [Thread-1 (]: Began running node model.nyc_taxi_platform.stg_trips
+[0m04:13:27.074574 [debug] [Thread-2 (]: Began running node model.nyc_taxi_platform.stg_zones
+[0m04:13:27.076425 [info ] [Thread-1 (]: 1 of 8 START sql view model gold.stg_trips ..................................... [RUN]
+[0m04:13:27.079024 [info ] [Thread-2 (]: 2 of 8 START sql view model gold.stg_zones ..................................... [RUN]
+[0m04:13:27.081952 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_nyc_taxi_gold, now model.nyc_taxi_platform.stg_trips)
+[0m04:13:27.084778 [debug] [Thread-2 (]: Acquiring new postgres connection 'model.nyc_taxi_platform.stg_zones'
+[0m04:13:27.086843 [debug] [Thread-1 (]: Began compiling node model.nyc_taxi_platform.stg_trips
+[0m04:13:27.089107 [debug] [Thread-2 (]: Began compiling node model.nyc_taxi_platform.stg_zones
+[0m04:13:27.102798 [debug] [Thread-1 (]: Writing injected SQL for node "model.nyc_taxi_platform.stg_trips"
+[0m04:13:27.107064 [debug] [Thread-2 (]: Writing injected SQL for node "model.nyc_taxi_platform.stg_zones"
+[0m04:13:27.113719 [debug] [Thread-1 (]: Began executing node model.nyc_taxi_platform.stg_trips
+[0m04:13:27.120932 [debug] [Thread-2 (]: Began executing node model.nyc_taxi_platform.stg_zones
+[0m04:13:27.200840 [debug] [Thread-2 (]: Writing runtime sql for node "model.nyc_taxi_platform.stg_zones"
+[0m04:13:27.200426 [debug] [Thread-1 (]: Writing runtime sql for node "model.nyc_taxi_platform.stg_trips"
+[0m04:13:27.207774 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:13:27.208880 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:13:27.210138 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: BEGIN
+[0m04:13:27.211460 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: BEGIN
+[0m04:13:27.212859 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m04:13:27.214167 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m04:13:27.286890 [debug] [Thread-2 (]: SQL status: BEGIN in 0.074 seconds
+[0m04:13:27.288470 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:13:27.290166 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_zones"} */
+
+  create view "nyc_taxi"."gold"."stg_zones__dbt_tmp"
+    
+    
+  as (
+    -- Staging model: stg_zones
+-- Đọc dữ liệu từ seed file taxi_zone_lookup
+
+SELECT
+   "LocationID" AS location_id,
+   "Borough" AS borough,
+   "Zone" AS zone,
+   "service_zone" AS service_zone
+FROM "nyc_taxi"."gold"."taxi_zone_lookup"
+  );
+[0m04:13:27.378297 [debug] [Thread-2 (]: SQL status: CREATE VIEW in 0.087 seconds
+[0m04:13:27.390942 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:13:27.393009 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_zones"} */
+alter table "nyc_taxi"."gold"."stg_zones" rename to "stg_zones__dbt_backup"
+[0m04:13:27.394040 [debug] [Thread-1 (]: SQL status: BEGIN in 0.180 seconds
+[0m04:13:27.397802 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:13:27.400080 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_trips"} */
+
+  create view "nyc_taxi"."gold"."stg_trips__dbt_tmp"
+    
+    
+  as (
+    -- Staging model: stg_trips
+-- Đọc dữ liệu từ nguồn gold.trips và chuẩn hóa tên cột
+
+SELECT 
+    -- Tạo mã ID chuyến đi duy nhất (do dữ liệu thô không có khóa chính)
+    md5(CONCAT(
+        COALESCE(CAST("VendorID" AS VARCHAR), ''),
+        COALESCE(CAST("tpep_pickup_datetime" AS VARCHAR), ''),
+        COALESCE(CAST("PULocationID" AS VARCHAR), '')
+    )) AS trip_id,
+
+    "VendorID" AS vendor_id,
+    "tpep_pickup_datetime" AS tpep_pickup_datetime,
+    "tpep_dropoff_datetime" AS tpep_dropoff_datetime,
+    "passenger_count" AS passenger_count,
+    "trip_distance" AS trip_distance,
+    "RatecodeID" AS ratecode_id,
+    "store_and_fwd_flag" AS store_and_fwd_flag,
+    "PULocationID" AS pickup_location_id,
+    "DOLocationID" AS dropoff_location_id,
+    "payment_type" AS payment_type,
+    "fare_amount" AS fare_amount,
+    "extra" AS extra,
+    "mta_tax" AS mta_tax,
+    "tip_amount" AS tip_amount,
+    "tolls_amount" AS tolls_amount,
+    "improvement_surcharge" AS improvement_surcharge,
+    "total_amount" AS total_amount,
+    "congestion_surcharge" AS congestion_surcharge,
+    "Airport_fee" AS airport_fee,
+    "pickup_borough" AS pickup_borough,
+    "pickup_zone_name" AS pickup_zone_name,
+    "service_zone" AS service_zone,
+    "trip_duration_min" AS trip_duration_min,
+    "tip_percentage" AS tip_percentage,
+    "speed_mph" AS speed_mph
+FROM "nyc_taxi"."gold"."trips"
+  );
+[0m04:13:27.414438 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.018 seconds
+[0m04:13:27.418788 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:13:27.420411 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_zones"} */
+alter table "nyc_taxi"."gold"."stg_zones__dbt_tmp" rename to "stg_zones"
+[0m04:13:27.432070 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.009 seconds
+[0m04:13:27.453607 [debug] [Thread-1 (]: SQL status: CREATE VIEW in 0.051 seconds
+[0m04:13:27.460261 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: COMMIT
+[0m04:13:27.464700 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:13:27.466599 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:13:27.468096 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_trips"} */
+alter table "nyc_taxi"."gold"."stg_trips" rename to "stg_trips__dbt_backup"
+[0m04:13:27.469641 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: COMMIT
+[0m04:13:27.509524 [debug] [Thread-2 (]: SQL status: COMMIT in 0.036 seconds
+[0m04:13:27.530919 [debug] [Thread-2 (]: Applying DROP to: "nyc_taxi"."gold"."stg_zones__dbt_backup"
+[0m04:13:27.558586 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.stg_zones"
+[0m04:13:27.560468 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_zones"} */
+drop view if exists "nyc_taxi"."gold"."stg_zones__dbt_backup" cascade
+[0m04:13:27.686666 [debug] [Thread-2 (]: SQL status: DROP VIEW in 0.124 seconds
+[0m04:13:27.695544 [debug] [Thread-2 (]: On model.nyc_taxi_platform.stg_zones: Close
+[0m04:13:27.707071 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b720b727e0>]}
+[0m04:13:27.711046 [info ] [Thread-2 (]: 2 of 8 OK created sql view model gold.stg_zones ................................ [[32mCREATE VIEW[0m in 0.62s]
+[0m04:13:27.714455 [debug] [Thread-2 (]: Finished running node model.nyc_taxi_platform.stg_zones
+[0m04:13:27.717603 [debug] [Thread-4 (]: Began running node model.nyc_taxi_platform.dim_location
+[0m04:13:27.719496 [info ] [Thread-4 (]: 3 of 8 START sql table model gold.dim_location ................................. [RUN]
+[0m04:13:27.722264 [debug] [Thread-4 (]: Acquiring new postgres connection 'model.nyc_taxi_platform.dim_location'
+[0m04:13:27.724552 [debug] [Thread-4 (]: Began compiling node model.nyc_taxi_platform.dim_location
+[0m04:13:27.728731 [debug] [Thread-4 (]: Writing injected SQL for node "model.nyc_taxi_platform.dim_location"
+[0m04:13:27.740520 [debug] [Thread-4 (]: Began executing node model.nyc_taxi_platform.dim_location
+[0m04:13:27.784326 [debug] [Thread-4 (]: Writing runtime sql for node "model.nyc_taxi_platform.dim_location"
+[0m04:13:27.794235 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:13:27.796296 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: BEGIN
+[0m04:13:27.798878 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m04:13:27.857657 [debug] [Thread-4 (]: SQL status: BEGIN in 0.059 seconds
+[0m04:13:27.859467 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:13:27.861134 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_location"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."dim_location__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Dimension model: dim_location
+-- Unique locations with zone and borough info
+
+SELECT
+    location_id,
+    zone,
+    borough,
+    service_zone
+FROM "nyc_taxi"."gold"."stg_zones"
+  );
+  
+[0m04:13:27.902835 [debug] [Thread-4 (]: SQL status: SELECT 265 in 0.040 seconds
+[0m04:13:27.913696 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:13:27.915561 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_location"} */
+alter table "nyc_taxi"."gold"."dim_location" rename to "dim_location__dbt_backup"
+[0m04:13:27.920015 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m04:13:27.925347 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:13:27.926919 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_location"} */
+alter table "nyc_taxi"."gold"."dim_location__dbt_tmp" rename to "dim_location"
+[0m04:13:27.930526 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m04:13:27.937977 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: COMMIT
+[0m04:13:27.940921 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:13:27.942322 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: COMMIT
+[0m04:13:27.965446 [debug] [Thread-4 (]: SQL status: COMMIT in 0.022 seconds
+[0m04:13:27.970442 [debug] [Thread-4 (]: Applying DROP to: "nyc_taxi"."gold"."dim_location__dbt_backup"
+[0m04:13:27.978102 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.dim_location"
+[0m04:13:27.980203 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_location"} */
+drop table if exists "nyc_taxi"."gold"."dim_location__dbt_backup" cascade
+[0m04:13:28.031334 [debug] [Thread-4 (]: SQL status: DROP TABLE in 0.049 seconds
+[0m04:13:28.034760 [debug] [Thread-4 (]: On model.nyc_taxi_platform.dim_location: Close
+[0m04:13:28.037472 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71c645130>]}
+[0m04:13:28.041295 [info ] [Thread-4 (]: 3 of 8 OK created sql table model gold.dim_location ............................ [[32mSELECT 265[0m in 0.32s]
+[0m04:13:28.044208 [debug] [Thread-4 (]: Finished running node model.nyc_taxi_platform.dim_location
+[0m04:19:31.418455 [debug] [Thread-2 (]: SQL status: SELECT 37632330 in 470.418 seconds
+[0m04:19:31.425749 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:19:31.428543 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_time"} */
+alter table "nyc_taxi"."gold"."dim_time" rename to "dim_time__dbt_backup"
+[0m04:19:31.436354 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.005 seconds
+[0m04:19:31.441846 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:19:31.444187 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_time"} */
+alter table "nyc_taxi"."gold"."dim_time__dbt_tmp" rename to "dim_time"
+[0m04:19:31.448940 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m04:19:31.453829 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: COMMIT
+[0m04:19:31.455985 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:19:31.457824 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: COMMIT
+[0m04:19:31.602260 [debug] [Thread-2 (]: SQL status: COMMIT in 0.142 seconds
+[0m04:19:31.607203 [debug] [Thread-2 (]: Applying DROP to: "nyc_taxi"."gold"."dim_time__dbt_backup"
+[0m04:19:31.611071 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:19:31.613341 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_time"} */
+drop table if exists "nyc_taxi"."gold"."dim_time__dbt_backup" cascade
+[0m04:19:31.721083 [debug] [Thread-2 (]: SQL status: DROP TABLE in 0.105 seconds
+[0m04:19:31.725359 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: Close
+[0m04:19:31.728510 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef05f8f50>]}
+[0m04:19:31.731452 [info ] [Thread-2 (]: 4 of 8 OK created sql table model gold.dim_time ................................ [[32mSELECT 37632330[0m in 470.93s]
+[0m04:19:31.739001 [debug] [Thread-2 (]: Finished running node model.nyc_taxi_platform.dim_time
+[0m04:24:30.917813 [debug] [Thread-3 (]: SQL status: SELECT 71233312 in 769.731 seconds
+[0m04:24:30.923327 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:24:30.925572 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.fact_trips"} */
+alter table "nyc_taxi"."gold"."fact_trips" rename to "fact_trips__dbt_backup"
+[0m04:24:30.930594 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m04:24:30.935662 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:24:30.938603 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.fact_trips"} */
+alter table "nyc_taxi"."gold"."fact_trips__dbt_tmp" rename to "fact_trips"
+[0m04:24:30.943531 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m04:24:30.949110 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: COMMIT
+[0m04:24:30.951643 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:24:30.953838 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: COMMIT
+[0m04:24:30.966209 [debug] [Thread-3 (]: SQL status: COMMIT in 0.010 seconds
+[0m04:24:30.971942 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 663.537 seconds
+rips__dbt_backup"
+[0m04:24:30.974551 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:24:30.977047 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.fact_trips"} */
+drop table if exists "nyc_taxi"."gold"."fact_trips__dbt_backup" cascade
+[0m04:24:30.980154 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_trips"} */
+alter table "nyc_taxi"."gold"."stg_trips__dbt_tmp" rename to "stg_trips"
+[0m04:24:30.986258 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m04:24:30.990751 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: COMMIT
+[0m04:24:30.993183 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:24:30.995403 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: COMMIT
+[0m04:24:31.003872 [debug] [Thread-1 (]: SQL status: COMMIT in 0.006 seconds
+[0m04:24:31.007958 [debug] [Thread-1 (]: Applying DROP to: "nyc_taxi"."gold"."stg_trips__dbt_backup"
+[0m04:24:31.011730 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.stg_trips"
+[0m04:24:31.015448 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.stg_trips"} */
+drop view if exists "nyc_taxi"."gold"."stg_trips__dbt_backup" cascade
+[0m04:24:31.024302 [debug] [Thread-1 (]: SQL status: DROP VIEW in 0.006 seconds
+[0m04:24:31.028313 [debug] [Thread-1 (]: On model.nyc_taxi_platform.stg_trips: Close
+[0m04:24:31.031530 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71c614c20>]}
+[0m04:24:31.034723 [info ] [Thread-1 (]: 1 of 8 OK created sql view model gold.stg_trips ................................ [[32mCREATE VIEW[0m in 663.95s]
+[0m04:24:31.038100 [debug] [Thread-1 (]: Finished running node model.nyc_taxi_platform.stg_trips
+[0m04:24:31.041834 [debug] [Thread-2 (]: Began running node model.nyc_taxi_platform.dim_time
+[0m04:24:31.042736 [debug] [Thread-3 (]: Began running node model.nyc_taxi_platform.fact_trips
+[0m04:24:31.045064 [info ] [Thread-2 (]: 4 of 8 START sql table model gold.dim_time ..................................... [RUN]
+[0m04:24:31.049457 [info ] [Thread-3 (]: 5 of 8 START sql table model gold.fact_trips ................................... [RUN]
+[0m04:24:31.051688 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.nyc_taxi_platform.stg_zones, now model.nyc_taxi_platform.dim_time)
+[0m04:24:31.054195 [debug] [Thread-3 (]: Acquiring new postgres connection 'model.nyc_taxi_platform.fact_trips'
+[0m04:24:31.056214 [debug] [Thread-2 (]: Began compiling node model.nyc_taxi_platform.dim_time
+[0m04:24:31.058302 [debug] [Thread-3 (]: Began compiling node model.nyc_taxi_platform.fact_trips
+[0m04:24:31.063135 [debug] [Thread-2 (]: Writing injected SQL for node "model.nyc_taxi_platform.dim_time"
+[0m04:24:31.067694 [debug] [Thread-3 (]: Writing injected SQL for node "model.nyc_taxi_platform.fact_trips"
+[0m04:24:31.077605 [debug] [Thread-3 (]: Began executing node model.nyc_taxi_platform.fact_trips
+[0m04:24:31.079197 [debug] [Thread-2 (]: Began executing node model.nyc_taxi_platform.dim_time
+[0m04:24:31.085626 [debug] [Thread-3 (]: Writing runtime sql for node "model.nyc_taxi_platform.fact_trips"
+[0m04:24:31.092209 [debug] [Thread-2 (]: Writing runtime sql for node "model.nyc_taxi_platform.dim_time"
+[0m04:24:31.101876 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:24:31.103102 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:24:31.105087 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: BEGIN
+[0m04:24:31.107069 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: BEGIN
+[0m04:24:31.108898 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m04:24:31.110685 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m04:24:31.149780 [debug] [Thread-3 (]: SQL status: DROP TABLE in 0.171 seconds
+[0m04:24:31.153418 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: Close
+[0m04:24:31.155726 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef1f595e0>]}
+[0m04:24:31.158955 [info ] [Thread-3 (]: 5 of 8 OK created sql table model gold.fact_trips .............................. [[32mSELECT 71233312[0m in 770.36s]
+[0m04:24:31.167525 [debug] [Thread-3 (]: Finished running node model.nyc_taxi_platform.fact_trips
+[0m04:24:31.171248 [debug] [Thread-1 (]: Began running node model.nyc_taxi_platform.mart_hourly_demand
+[0m04:24:31.172193 [debug] [Thread-4 (]: Began running node model.nyc_taxi_platform.mart_monthly_trends
+[0m04:24:31.172886 [debug] [Thread-2 (]: Began running node model.nyc_taxi_platform.mart_revenue_by_zone
+[0m04:24:31.174808 [info ] [Thread-1 (]: 6 of 8 START sql table model gold.mart_hourly_demand ........................... [RUN]
+[0m04:24:31.177233 [info ] [Thread-4 (]: 7 of 8 START sql table model gold.mart_monthly_trends .......................... [RUN]
+[0m04:24:31.181040 [info ] [Thread-2 (]: 8 of 8 START sql table model gold.mart_revenue_by_zone ......................... [RUN]
+[0m04:24:31.188615 [debug] [Thread-2 (]: SQL status: BEGIN in 0.079 seconds
+om the pool (formerly model.nyc_taxi_platform.stg_trips, now model.nyc_taxi_platform.mart_hourly_demand)
+[0m04:24:31.186488 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.nyc_taxi_platform.dim_location, now model.nyc_taxi_platform.mart_monthly_trends)
+[0m04:24:31.189124 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.nyc_taxi_platform.dim_time, now model.nyc_taxi_platform.mart_revenue_by_zone)
+[0m04:24:31.191481 [debug] [Thread-1 (]: Began compiling node model.nyc_taxi_platform.mart_hourly_demand
+[0m04:24:31.195928 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_time"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."dim_time__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Dimension model: dim_time
+-- Chi tiết hóa thời gian đón khách từ stg_trips
+
+
+
+SELECT DISTINCT
+    tpep_pickup_datetime AS datetime_id,
+    EXTRACT(YEAR FROM tpep_pickup_datetime) AS year,
+    EXTRACT(MONTH FROM tpep_pickup_datetime) AS month,
+    EXTRACT(DAY FROM tpep_pickup_datetime) AS day,
+    EXTRACT(HOUR FROM tpep_pickup_datetime) AS hour,
+    EXTRACT(DOW FROM tpep_pickup_datetime) AS day_of_week,
+    TO_CHAR(tpep_pickup_datetime, 'FMDay') AS day_name,
+    CASE 
+        WHEN EXTRACT(DOW FROM tpep_pickup_datetime) IN (0, 6) THEN TRUE 
+        ELSE FALSE 
+    END AS is_weekend
+FROM "nyc_taxi"."gold"."stg_trips"
+  );
+  
+[0m04:24:31.198654 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.fact_trips"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."fact_trips__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Fact model: fact_trips
+-- Core trip metrics joined with dimension keys
+
+SELECT
+    trip_id,
+    pickup_location_id,
+    dropoff_location_id,
+    tpep_pickup_datetime  AS pickup_datetime,
+    tpep_dropoff_datetime AS dropoff_datetime,
+    total_amount,
+    tip_amount,
+    fare_amount,
+    trip_distance,
+    trip_duration_min,
+    tip_percentage
+FROM "nyc_taxi"."gold"."stg_trips"
+  );
+  
+[0m04:24:31.193435 [debug] [Thread-4 (]: Began compiling node model.nyc_taxi_platform.mart_monthly_trends
+[0m04:24:31.195999 [debug] [Thread-2 (]: Began compiling node model.nyc_taxi_platform.mart_revenue_by_zone
+[0m04:24:31.202680 [debug] [Thread-1 (]: Writing injected SQL for node "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:24:31.207389 [debug] [Thread-4 (]: Writing injected SQL for node "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:24:31.213513 [debug] [Thread-2 (]: Writing injected SQL for node "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:24:31.236980 [debug] [Thread-1 (]: Began executing node model.nyc_taxi_platform.mart_hourly_demand
+[0m04:24:31.238174 [debug] [Thread-4 (]: Began executing node model.nyc_taxi_platform.mart_monthly_trends
+[0m04:24:31.250124 [debug] [Thread-1 (]: Writing runtime sql for node "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:24:31.252151 [debug] [Thread-2 (]: Began executing node model.nyc_taxi_platform.mart_revenue_by_zone
+[0m04:24:31.261403 [debug] [Thread-4 (]: Writing runtime sql for node "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:24:31.274490 [debug] [Thread-2 (]: Writing runtime sql for node "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:24:31.288844 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:24:31.291113 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: BEGIN
+[0m04:24:31.293331 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m04:24:31.297591 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:24:31.298936 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:24:31.302743 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: BEGIN
+[0m04:24:31.307589 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: BEGIN
+[0m04:24:31.309778 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m04:24:31.317558 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m04:24:31.376899 [debug] [Thread-1 (]: SQL status: BEGIN in 0.084 seconds
+[0m04:24:31.380778 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:24:31.384000 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_hourly_demand"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."mart_hourly_demand__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart model: mart_hourly_demand
+-- Phân tích nhu cầu chuyến đi theo giờ và quận/huyện
+
+SELECT
+    EXTRACT(HOUR FROM t.pickup_datetime) AS pickup_hour,
+    l.borough AS pickup_borough,
+    COUNT(*) AS trip_count,
+    ROUND(AVG(t.total_amount)::NUMERIC, 2) AS avg_total_amount,
+    ROUND(AVG(t.trip_distance)::NUMERIC, 2) AS avg_trip_distance
+FROM "nyc_taxi"."gold"."fact_trips" t
+LEFT JOIN "nyc_taxi"."gold"."dim_location" l ON t.pickup_location_id = l.location_id
+GROUP BY 1, 2
+ORDER BY 1, 2
+  );
+  
+[0m04:24:31.398984 [debug] [Thread-2 (]: SQL status: BEGIN in 0.089 seconds
+[0m04:24:31.402737 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:24:31.405174 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_revenue_by_zone"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."mart_revenue_by_zone__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart model: mart_revenue_by_zone
+-- Phân tích doanh thu và tiền tip theo khu vực đón khách
+
+SELECT
+    l.zone AS pickup_zone,
+    l.borough AS pickup_borough,
+    COUNT(*) AS total_trips,
+    ROUND(SUM(t.total_amount)::NUMERIC, 2) AS total_revenue,
+    ROUND(SUM(t.fare_amount)::NUMERIC, 2) AS total_fare,
+    ROUND(SUM(t.tip_amount)::NUMERIC, 2) AS total_tips,
+    ROUND(AVG(t.tip_percentage)::NUMERIC, 2) AS avg_tip_percentage
+FROM "nyc_taxi"."gold"."fact_trips" t
+JOIN "nyc_taxi"."gold"."dim_location" l ON t.pickup_location_id = l.location_id
+GROUP BY 1, 2
+ORDER BY total_revenue DESC
+  );
+  
+[0m04:24:31.407500 [debug] [Thread-4 (]: SQL status: BEGIN in 0.090 seconds
+[0m04:24:31.410291 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:24:31.414416 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_monthly_trends"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."mart_monthly_trends__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart model: mart_monthly_trends
+-- Month-over-month comparison 2024 vs 2025
+
+SELECT
+    dt.year,
+    dt.month,
+    COUNT(*)                             AS trip_count,
+    ROUND(SUM(t.total_amount)::NUMERIC, 2) AS total_revenue,
+    ROUND(AVG(t.trip_distance)::NUMERIC, 2) AS avg_distance
+FROM "nyc_taxi"."gold"."fact_trips" t
+JOIN "nyc_taxi"."gold"."dim_time" dt ON t.pickup_datetime = dt.datetime_id
+GROUP BY dt.year, dt.month
+ORDER BY dt.year, dt.month
+  );
+  
+[0m04:31:05.332905 [debug] [Thread-1 (]: SQL status: SELECT 192 in 393.966 seconds
+[0m04:31:05.341096 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:31:05.343407 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_hourly_demand"} */
+alter table "nyc_taxi"."gold"."mart_hourly_demand" rename to "mart_hourly_demand__dbt_backup"
+[0m04:31:05.691680 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.345 seconds
+[0m04:31:05.700155 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:31:05.701826 [debug] [Thread-2 (]: SQL status: SELECT 262 in 394.313 seconds
+[0m04:31:05.705454 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_hourly_demand"} */
+alter table "nyc_taxi"."gold"."mart_hourly_demand__dbt_tmp" rename to "mart_hourly_demand"
+[0m04:31:05.712581 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:31:05.716683 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_revenue_by_zone"} */
+alter table "nyc_taxi"."gold"."mart_revenue_by_zone" rename to "mart_revenue_by_zone__dbt_backup"
+[0m04:31:05.718245 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m04:31:05.726050 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: COMMIT
+[0m04:31:05.727102 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.006 seconds
+[0m04:31:05.729544 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:31:05.737039 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:31:05.740036 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: COMMIT
+[0m04:31:05.742573 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_revenue_by_zone"} */
+alter table "nyc_taxi"."gold"."mart_revenue_by_zone__dbt_tmp" rename to "mart_revenue_by_zone"
+[0m04:31:05.780078 [debug] [Thread-1 (]: SQL status: COMMIT in 0.035 seconds
+[0m04:31:05.780930 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.034 seconds
+[0m04:31:05.787575 [debug] [Thread-1 (]: Applying DROP to: "nyc_taxi"."gold"."mart_hourly_demand__dbt_backup"
+[0m04:31:05.792390 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: COMMIT
+[0m04:31:05.795844 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:31:05.798355 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:31:05.801092 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_hourly_demand"} */
+drop table if exists "nyc_taxi"."gold"."mart_hourly_demand__dbt_backup" cascade
+[0m04:31:05.806122 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: COMMIT
+[0m04:31:05.818298 [debug] [Thread-2 (]: SQL status: COMMIT in 0.008 seconds
+[0m04:31:05.826302 [debug] [Thread-2 (]: Applying DROP to: "nyc_taxi"."gold"."mart_revenue_by_zone__dbt_backup"
+[0m04:31:05.830039 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:31:05.832295 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_revenue_by_zone"} */
+drop table if exists "nyc_taxi"."gold"."mart_revenue_by_zone__dbt_backup" cascade
+[0m04:31:05.839501 [debug] [Thread-1 (]: SQL status: DROP TABLE in 0.031 seconds
+[0m04:31:05.844372 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: Close
+[0m04:31:05.847532 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef05eb2f0>]}
+[0m04:31:05.852548 [info ] [Thread-1 (]: 6 of 8 OK created sql table model gold.mart_hourly_demand ...................... [[32mSELECT 192[0m in 394.66s]
+[0m04:31:05.859678 [debug] [Thread-1 (]: Finished running node model.nyc_taxi_platform.mart_hourly_demand
+[0m04:31:05.861536 [debug] [Thread-2 (]: SQL status: DROP TABLE in 0.027 seconds
+[0m04:31:05.867374 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: Close
+[0m04:31:05.872598 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef05eb320>]}
+[0m04:31:05.880496 [info ] [Thread-2 (]: 8 of 8 OK created sql table model gold.mart_revenue_by_zone .................... [[32mSELECT 262[0m in 394.68s]
+[0m04:31:05.884070 [debug] [Thread-2 (]: Finished running node model.nyc_taxi_platform.mart_revenue_by_zone
+[0m04:32:07.498865 [debug] [Thread-4 (]: SQL status: SELECT 24 in 456.106 seconds
+[0m04:32:07.507786 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:32:07.509864 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_monthly_trends"} */
+alter table "nyc_taxi"."gold"."mart_monthly_trends" rename to "mart_monthly_trends__dbt_backup"
+[0m04:32:07.514775 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m04:32:07.523020 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:32:07.524849 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_monthly_trends"} */
+alter table "nyc_taxi"."gold"."mart_monthly_trends__dbt_tmp" rename to "mart_monthly_trends"
+[0m04:32:07.529436 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m04:32:07.534653 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: COMMIT
+[0m04:32:07.538926 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:32:07.541045 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: COMMIT
+[0m04:32:07.575209 [debug] [Thread-4 (]: SQL status: COMMIT in 0.032 seconds
+[0m04:32:07.580951 [debug] [Thread-4 (]: Applying DROP to: "nyc_taxi"."gold"."mart_monthly_trends__dbt_backup"
+[0m04:32:07.584222 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:32:07.587183 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_monthly_trends"} */
+drop table if exists "nyc_taxi"."gold"."mart_monthly_trends__dbt_backup" cascade
+[0m04:32:07.606605 [debug] [Thread-4 (]: SQL status: DROP TABLE in 0.015 seconds
+[0m04:32:07.610666 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: Close
+[0m04:32:07.613464 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '3c603e42-c8c1-406f-a9f0-062e9bb16ade', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef1fc0470>]}
+[0m04:32:07.616146 [info ] [Thread-4 (]: 7 of 8 OK created sql table model gold.mart_monthly_trends ..................... [[32mSELECT 24[0m in 456.43s]
+[0m04:32:07.620648 [debug] [Thread-4 (]: Finished running node model.nyc_taxi_platform.mart_monthly_trends
+[0m04:32:07.627069 [debug] [MainThread]: Using postgres connection "master"
+[0m04:32:07.629326 [debug] [MainThread]: On master: BEGIN
+[0m04:32:07.631547 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m04:32:07.709554 [debug] [MainThread]: SQL status: BEGIN in 0.078 seconds
+[0m04:32:07.711832 [debug] [MainThread]: On master: COMMIT
+[0m04:32:07.714075 [debug] [MainThread]: Using postgres connection "master"
+[0m04:32:07.716614 [debug] [MainThread]: On master: COMMIT
+[0m04:32:07.720942 [debug] [MainThread]: SQL status: COMMIT in 0.002 seconds
+[0m04:32:07.723305 [debug] [MainThread]: On master: Close
+[0m04:32:07.725319 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m04:32:07.727841 [debug] [MainThread]: Connection 'model.nyc_taxi_platform.mart_hourly_demand' was properly closed.
+[0m04:32:07.729725 [debug] [MainThread]: Connection 'model.nyc_taxi_platform.mart_revenue_by_zone' was properly closed.
+[0m04:32:07.731048 [debug] [MainThread]: Connection 'model.nyc_taxi_platform.mart_monthly_trends' was properly closed.
+[0m04:32:07.732626 [debug] [MainThread]: Connection 'model.nyc_taxi_platform.fact_trips' was properly closed.
+[0m04:32:07.734531 [info ] [MainThread]: 
+[0m04:32:07.739205 [info ] [MainThread]: Finished running 6 table models, 2 view models in 0 hours 20 minutes and 27.85 seconds (1227.85s).
+[0m04:32:07.743301 [debug] [MainThread]: Command end result
+[0m04:32:07.863846 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m04:32:07.873374 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m04:32:07.880813 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m04:32:07.900036 [debug] [MainThread]: Wrote artifact RunExecutionResult to /opt/airflow/dbt/target/run_results.json
+[0m04:32:07.901833 [info ] [MainThread]: 
+[0m04:32:07.905487 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m04:32:07.908113 [info ] [MainThread]: 
+[0m04:32:07.910300 [info ] [MainThread]: Done. PASS=8 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=8
+[0m04:32:07.913504 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 1231.9781, "process_in_blocks": "3901", "process_kernel_time": 0.587834, "process_mem_max_rss": "143112", "process_out_blocks": "1056", "process_user_time": 7.769816}
+[0m04:32:07.916027 [debug] [MainThread]: Command `dbt run` succeeded at 04:32:07.915749 after 1231.98 seconds
+[0m04:32:07.918122 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef5bd9220>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef3d17020>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x702ef3d14350>]}
+[0m04:32:07.921711 [debug] [MainThread]: Flushing usage events
+[0m04:32:10.926065 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m04:34:05.070740 [debug] [Thread-2 (]: SQL status: SELECT 37632330 in 573.899 seconds
+[0m04:34:05.076546 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:34:05.078544 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_time"} */
+alter table "nyc_taxi"."gold"."dim_time" rename to "dim_time__dbt_backup"
+[0m04:34:05.085217 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.004 seconds
+[0m04:34:05.089906 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:34:05.092041 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_time"} */
+alter table "nyc_taxi"."gold"."dim_time__dbt_tmp" rename to "dim_time"
+[0m04:34:05.096378 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m04:34:05.104532 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: COMMIT
+[0m04:34:05.107394 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:34:05.109640 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: COMMIT
+[0m04:34:05.120819 [debug] [Thread-2 (]: SQL status: COMMIT in 0.009 seconds
+[0m04:34:05.126043 [debug] [Thread-2 (]: Applying DROP to: "nyc_taxi"."gold"."dim_time__dbt_backup"
+[0m04:34:05.129460 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.dim_time"
+[0m04:34:05.133067 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.dim_time"} */
+drop table if exists "nyc_taxi"."gold"."dim_time__dbt_backup" cascade
+[0m04:34:05.161225 [debug] [Thread-2 (]: SQL status: DROP TABLE in 0.026 seconds
+[0m04:34:05.167037 [debug] [Thread-2 (]: On model.nyc_taxi_platform.dim_time: Close
+[0m04:34:05.169364 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71c51ae70>]}
+[0m04:34:05.171733 [info ] [Thread-2 (]: 4 of 8 OK created sql table model gold.dim_time ................................ [[32mSELECT 37632330[0m in 574.12s]
+[0m04:34:05.177733 [debug] [Thread-2 (]: Finished running node model.nyc_taxi_platform.dim_time
+[0m04:40:07.089369 [debug] [Thread-3 (]: SQL status: SELECT 71233312 in 935.935 seconds
+[0m04:40:07.094718 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:40:07.096945 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.fact_trips"} */
+alter table "nyc_taxi"."gold"."fact_trips" rename to "fact_trips__dbt_backup"
+[0m04:40:08.172916 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 1.075 seconds
+[0m04:40:08.178969 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:40:08.181381 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.fact_trips"} */
+alter table "nyc_taxi"."gold"."fact_trips__dbt_tmp" rename to "fact_trips"
+[0m04:40:08.187166 [debug] [Thread-3 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m04:40:08.193174 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: COMMIT
+[0m04:40:08.195977 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:40:08.198635 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: COMMIT
+[0m04:40:08.207862 [debug] [Thread-3 (]: SQL status: COMMIT in 0.005 seconds
+[0m04:40:08.213418 [debug] [Thread-3 (]: Applying DROP to: "nyc_taxi"."gold"."fact_trips__dbt_backup"
+[0m04:40:08.217203 [debug] [Thread-3 (]: Using postgres connection "model.nyc_taxi_platform.fact_trips"
+[0m04:40:08.220028 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.fact_trips"} */
+drop table if exists "nyc_taxi"."gold"."fact_trips__dbt_backup" cascade
+[0m04:40:08.323483 [debug] [Thread-3 (]: SQL status: DROP TABLE in 0.101 seconds
+[0m04:40:08.326699 [debug] [Thread-3 (]: On model.nyc_taxi_platform.fact_trips: Close
+[0m04:40:08.328778 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71c56fad0>]}
+[0m04:40:08.330899 [info ] [Thread-3 (]: 5 of 8 OK created sql table model gold.fact_trips .............................. [[32mSELECT 71233312[0m in 937.27s]
+[0m04:40:08.340488 [debug] [Thread-3 (]: Finished running node model.nyc_taxi_platform.fact_trips
+[0m04:40:08.343688 [debug] [Thread-1 (]: Began running node model.nyc_taxi_platform.mart_hourly_demand
+[0m04:40:08.344543 [debug] [Thread-4 (]: Began running node model.nyc_taxi_platform.mart_monthly_trends
+[0m04:40:08.345243 [debug] [Thread-2 (]: Began running node model.nyc_taxi_platform.mart_revenue_by_zone
+[0m04:40:08.347234 [info ] [Thread-1 (]: 6 of 8 START sql table model gold.mart_hourly_demand ........................... [RUN]
+[0m04:40:08.349881 [info ] [Thread-4 (]: 7 of 8 START sql table model gold.mart_monthly_trends .......................... [RUN]
+[0m04:40:08.353466 [info ] [Thread-2 (]: 8 of 8 START sql table model gold.mart_revenue_by_zone ......................... [RUN]
+[0m04:40:08.355555 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.nyc_taxi_platform.stg_trips, now model.nyc_taxi_platform.mart_hourly_demand)
+[0m04:40:08.357291 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.nyc_taxi_platform.dim_location, now model.nyc_taxi_platform.mart_monthly_trends)
+[0m04:40:08.358836 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.nyc_taxi_platform.dim_time, now model.nyc_taxi_platform.mart_revenue_by_zone)
+[0m04:40:08.360351 [debug] [Thread-1 (]: Began compiling node model.nyc_taxi_platform.mart_hourly_demand
+[0m04:40:08.361719 [debug] [Thread-4 (]: Began compiling node model.nyc_taxi_platform.mart_monthly_trends
+[0m04:40:08.363118 [debug] [Thread-2 (]: Began compiling node model.nyc_taxi_platform.mart_revenue_by_zone
+[0m04:40:08.368344 [debug] [Thread-1 (]: Writing injected SQL for node "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:40:08.372957 [debug] [Thread-4 (]: Writing injected SQL for node "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:40:08.377082 [debug] [Thread-2 (]: Writing injected SQL for node "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:40:08.385545 [debug] [Thread-4 (]: Began executing node model.nyc_taxi_platform.mart_monthly_trends
+[0m04:40:08.386751 [debug] [Thread-1 (]: Began executing node model.nyc_taxi_platform.mart_hourly_demand
+[0m04:40:08.387931 [debug] [Thread-2 (]: Began executing node model.nyc_taxi_platform.mart_revenue_by_zone
+[0m04:40:08.392942 [debug] [Thread-4 (]: Writing runtime sql for node "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:40:08.398010 [debug] [Thread-1 (]: Writing runtime sql for node "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:40:08.404404 [debug] [Thread-2 (]: Writing runtime sql for node "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:40:08.411886 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:40:08.413337 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:40:08.416368 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: BEGIN
+[0m04:40:08.418079 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:40:08.419716 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: BEGIN
+[0m04:40:08.421238 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m04:40:08.422613 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: BEGIN
+[0m04:40:08.424223 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m04:40:08.427088 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m04:40:08.493504 [debug] [Thread-1 (]: SQL status: BEGIN in 0.069 seconds
+[0m04:40:08.494987 [debug] [Thread-4 (]: SQL status: BEGIN in 0.074 seconds
+[0m04:40:08.496014 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m04:40:08.497874 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m04:40:08.499688 [debug] [Thread-2 (]: SQL status: BEGIN in 0.072 seconds
+[0m04:40:08.500612 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_hourly_demand"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."mart_hourly_demand__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart model: mart_hourly_demand
+-- Phân tích nhu cầu chuyến đi theo giờ và quận/huyện
+
+SELECT
+    EXTRACT(HOUR FROM t.pickup_datetime) AS pickup_hour,
+    l.borough AS pickup_borough,
+    COUNT(*) AS trip_count,
+    ROUND(AVG(t.total_amount)::NUMERIC, 2) AS avg_total_amount,
+    ROUND(AVG(t.trip_distance)::NUMERIC, 2) AS avg_trip_distance
+FROM "nyc_taxi"."gold"."fact_trips" t
+LEFT JOIN "nyc_taxi"."gold"."dim_location" l ON t.pickup_location_id = l.location_id
+GROUP BY 1, 2
+ORDER BY 1, 2
+  );
+  
+[0m04:40:08.502548 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_monthly_trends"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."mart_monthly_trends__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart model: mart_monthly_trends
+-- Month-over-month comparison 2024 vs 2025
+
+SELECT
+    dt.year,
+    dt.month,
+    COUNT(*)                             AS trip_count,
+    ROUND(SUM(t.total_amount)::NUMERIC, 2) AS total_revenue,
+    ROUND(AVG(t.trip_distance)::NUMERIC, 2) AS avg_distance
+FROM "nyc_taxi"."gold"."fact_trips" t
+JOIN "nyc_taxi"."gold"."dim_time" dt ON t.pickup_datetime = dt.datetime_id
+GROUP BY dt.year, dt.month
+ORDER BY dt.year, dt.month
+  );
+  
+[0m04:40:08.504048 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m04:40:08.507703 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_revenue_by_zone"} */
+
+  
+    
+
+  create  table "nyc_taxi"."gold"."mart_revenue_by_zone__dbt_tmp"
+  
+  
+    as
+  
+  (
+    -- Mart model: mart_revenue_by_zone
+-- Phân tích doanh thu và tiền tip theo khu vực đón khách
+
+SELECT
+    l.zone AS pickup_zone,
+    l.borough AS pickup_borough,
+    COUNT(*) AS total_trips,
+    ROUND(SUM(t.total_amount)::NUMERIC, 2) AS total_revenue,
+    ROUND(SUM(t.fare_amount)::NUMERIC, 2) AS total_fare,
+    ROUND(SUM(t.tip_amount)::NUMERIC, 2) AS total_tips,
+    ROUND(AVG(t.tip_percentage)::NUMERIC, 2) AS avg_tip_percentage
+FROM "nyc_taxi"."gold"."fact_trips" t
+JOIN "nyc_taxi"."gold"."dim_location" l ON t.pickup_location_id = l.location_id
+GROUP BY 1, 2
+ORDER BY total_revenue DESC
+  );
+  
+[0m07:19:20.668513 [debug] [Thread-1 (]: SQL status: SELECT 192 in 357.665 seconds
+[0m07:19:20.674876 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m07:19:20.676827 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_hourly_demand"} */
+alter table "nyc_taxi"."gold"."mart_hourly_demand" rename to "mart_hourly_demand__dbt_backup"
+[0m07:19:20.681207 [debug] [Thread-2 (]: SQL status: SELECT 262 in 357.674 seconds
+[0m07:19:20.687938 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m07:19:20.688729 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.010 seconds
+[0m07:19:20.690876 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_revenue_by_zone"} */
+alter table "nyc_taxi"."gold"."mart_revenue_by_zone" rename to "mart_revenue_by_zone__dbt_backup"
+[0m07:19:20.697828 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m07:19:20.700877 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_hourly_demand"} */
+alter table "nyc_taxi"."gold"."mart_hourly_demand__dbt_tmp" rename to "mart_hourly_demand"
+[0m07:19:20.702382 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m07:19:20.708533 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m07:19:20.709660 [debug] [Thread-1 (]: SQL status: ALTER TABLE in 0.005 seconds
+[0m07:19:20.712141 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_revenue_by_zone"} */
+alter table "nyc_taxi"."gold"."mart_revenue_by_zone__dbt_tmp" rename to "mart_revenue_by_zone"
+[0m07:19:20.718062 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: COMMIT
+[0m07:19:20.721487 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m07:19:20.722510 [debug] [Thread-2 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m07:19:20.724455 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: COMMIT
+[0m07:19:20.730188 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: COMMIT
+[0m07:19:20.733650 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m07:19:20.735508 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: COMMIT
+[0m07:19:20.765046 [debug] [Thread-1 (]: SQL status: COMMIT in 0.033 seconds
+[0m07:19:20.766085 [debug] [Thread-2 (]: SQL status: COMMIT in 0.029 seconds
+[0m07:19:21.263549 [debug] [Thread-1 (]: Applying DROP to: "nyc_taxi"."gold"."mart_hourly_demand__dbt_backup"
+[0m07:19:21.269393 [debug] [Thread-2 (]: Applying DROP to: "nyc_taxi"."gold"."mart_revenue_by_zone__dbt_backup"
+[0m07:19:21.273186 [debug] [Thread-1 (]: Using postgres connection "model.nyc_taxi_platform.mart_hourly_demand"
+[0m07:19:21.278014 [debug] [Thread-2 (]: Using postgres connection "model.nyc_taxi_platform.mart_revenue_by_zone"
+[0m07:19:21.281116 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_hourly_demand"} */
+drop table if exists "nyc_taxi"."gold"."mart_hourly_demand__dbt_backup" cascade
+[0m07:19:21.283762 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_revenue_by_zone"} */
+drop table if exists "nyc_taxi"."gold"."mart_revenue_by_zone__dbt_backup" cascade
+[0m07:19:21.364408 [debug] [Thread-1 (]: SQL status: DROP TABLE in 0.077 seconds
+[0m07:19:21.365643 [debug] [Thread-2 (]: SQL status: DROP TABLE in 0.075 seconds
+[0m07:19:21.370131 [debug] [Thread-1 (]: On model.nyc_taxi_platform.mart_hourly_demand: Close
+[0m07:19:21.374104 [debug] [Thread-2 (]: On model.nyc_taxi_platform.mart_revenue_by_zone: Close
+[0m07:19:21.376582 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71c56c050>]}
+[0m07:19:21.379403 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71c56da90>]}
+[0m07:19:21.382357 [info ] [Thread-1 (]: 6 of 8 OK created sql table model gold.mart_hourly_demand ...................... [[32mSELECT 192[0m in 9553.02s]
+[0m07:19:21.384816 [info ] [Thread-2 (]: 8 of 8 OK created sql table model gold.mart_revenue_by_zone .................... [[32mSELECT 262[0m in 9553.02s]
+[0m07:19:21.388035 [debug] [Thread-1 (]: Finished running node model.nyc_taxi_platform.mart_hourly_demand
+[0m07:19:21.390830 [debug] [Thread-2 (]: Finished running node model.nyc_taxi_platform.mart_revenue_by_zone
+[0m07:19:51.492344 [debug] [Thread-4 (]: SQL status: SELECT 24 in 388.491 seconds
+[0m07:19:51.497621 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m07:19:51.500611 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_monthly_trends"} */
+alter table "nyc_taxi"."gold"."mart_monthly_trends" rename to "mart_monthly_trends__dbt_backup"
+[0m07:19:51.506230 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.003 seconds
+[0m07:19:51.512042 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m07:19:51.514445 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_monthly_trends"} */
+alter table "nyc_taxi"."gold"."mart_monthly_trends__dbt_tmp" rename to "mart_monthly_trends"
+[0m07:19:51.518370 [debug] [Thread-4 (]: SQL status: ALTER TABLE in 0.002 seconds
+[0m07:19:51.523338 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: COMMIT
+[0m07:19:51.525490 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m07:19:51.527468 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: COMMIT
+[0m07:19:51.532127 [debug] [Thread-4 (]: SQL status: COMMIT in 0.003 seconds
+[0m07:19:51.535665 [debug] [Thread-4 (]: Applying DROP to: "nyc_taxi"."gold"."mart_monthly_trends__dbt_backup"
+[0m07:19:51.538150 [debug] [Thread-4 (]: Using postgres connection "model.nyc_taxi_platform.mart_monthly_trends"
+[0m07:19:51.540018 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "nyc_taxi_profile", "target_name": "dev", "node_id": "model.nyc_taxi_platform.mart_monthly_trends"} */
+drop table if exists "nyc_taxi"."gold"."mart_monthly_trends__dbt_backup" cascade
+[0m07:19:51.547638 [debug] [Thread-4 (]: SQL status: DROP TABLE in 0.006 seconds
+[0m07:19:51.551318 [debug] [Thread-4 (]: On model.nyc_taxi_platform.mart_monthly_trends: Close
+[0m07:19:51.554177 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8ef417e9-b88a-4b30-8ca5-cf4e0f4f4909', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71c56f7a0>]}
+[0m07:19:51.557619 [info ] [Thread-4 (]: 7 of 8 OK created sql table model gold.mart_monthly_trends ..................... [[32mSELECT 24[0m in 9583.20s]
+[0m07:19:51.560286 [debug] [Thread-4 (]: Finished running node model.nyc_taxi_platform.mart_monthly_trends
+[0m07:19:51.566094 [debug] [MainThread]: Using postgres connection "master"
+[0m07:19:51.568287 [debug] [MainThread]: On master: BEGIN
+[0m07:19:51.570039 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m07:19:51.631615 [debug] [MainThread]: SQL status: BEGIN in 0.061 seconds
+[0m07:19:51.633622 [debug] [MainThread]: On master: COMMIT
+[0m07:19:51.635594 [debug] [MainThread]: Using postgres connection "master"
+[0m07:19:51.637485 [debug] [MainThread]: On master: COMMIT
+[0m07:19:51.640574 [debug] [MainThread]: SQL status: COMMIT in 0.001 seconds
+[0m07:19:51.642365 [debug] [MainThread]: On master: Close
+[0m07:19:51.644521 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m07:19:51.647168 [debug] [MainThread]: Connection 'model.nyc_taxi_platform.mart_hourly_demand' was properly closed.
+[0m07:19:51.649214 [debug] [MainThread]: Connection 'model.nyc_taxi_platform.mart_revenue_by_zone' was properly closed.
+[0m07:19:51.651180 [debug] [MainThread]: Connection 'model.nyc_taxi_platform.mart_monthly_trends' was properly closed.
+[0m07:19:51.653023 [debug] [MainThread]: Connection 'model.nyc_taxi_platform.fact_trips' was properly closed.
+[0m07:19:51.655401 [info ] [MainThread]: 
+[0m07:19:51.657959 [info ] [MainThread]: Finished running 6 table models, 2 view models in 3 hours 6 minutes and 27.38 seconds (11187.38s).
+[0m07:19:51.662518 [debug] [MainThread]: Command end result
+[0m07:19:51.810947 [debug] [MainThread]: Wrote artifact WritableManifest to /opt/airflow/dbt/target/manifest.json
+[0m07:19:51.830663 [debug] [MainThread]: Wrote artifact SemanticManifest to /opt/airflow/dbt/target/semantic_manifest.json
+[0m07:19:51.842992 [debug] [MainThread]: Wrote artifact OsiDocument to /opt/airflow/dbt/target/osi_document.json
+[0m07:19:51.869157 [debug] [MainThread]: Wrote artifact RunExecutionResult to /opt/airflow/dbt/target/run_results.json
+[0m07:19:51.871341 [info ] [MainThread]: 
+[0m07:19:51.873733 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m07:19:51.876340 [info ] [MainThread]: 
+[0m07:19:51.880272 [info ] [MainThread]: Done. PASS=8 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=8
+[0m07:19:51.886592 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 1994.8788, "process_in_blocks": "1070", "process_kernel_time": 0.526726, "process_mem_max_rss": "135976", "process_out_blocks": "1904", "process_user_time": 6.348652}
+[0m07:19:51.889687 [debug] [MainThread]: Command `dbt run` succeeded at 07:19:51.889321 after 1994.88 seconds
+[0m07:19:51.893131 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71ef95550>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b71d0f8d10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b720376810>]}
+[0m07:19:51.895359 [debug] [MainThread]: Flushing usage events
+[0m07:19:54.835545 [debug] [MainThread]: An error was encountered while trying to flush usage events

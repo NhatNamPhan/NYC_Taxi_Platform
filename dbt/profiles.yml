@@ -3,10 +3,10 @@ nyc_taxi_profile:
   outputs:
     dev:
       type: postgres
-      host: localhost
-      port: 5433
-      user: postgres
-      password: "1234"
-      dbname: nyc_taxi
+      host: "{{ env_var('DB_HOST', 'localhost') }}"
+      port: "{{ env_var('DB_PORT', '5433') | int }}"
+      user: "{{ env_var('DB_USER', 'postgres') }}"
+      password: "{{ env_var('DB_PASSWORD', '1234') }}"
+      dbname: "{{ env_var('DB_NAME', 'nyc_taxi') }}"
       schema: gold
-      threads: 4 
+      threads: 4

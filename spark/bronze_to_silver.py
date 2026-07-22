@@ -2,14 +2,16 @@ from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 import os
 import sys
+import platform
 
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
     
-    hadoop_home = os.path.join(project_root, "hadoop")
-    os.environ["HADOOP_HOME"] = hadoop_home
-    os.environ["PATH"] += os.pathsep + os.path.join(hadoop_home, "bin")
+    if platform.system() == "Windows":
+        hadoop_home = os.path.join(project_root, "hadoop")
+        os.environ["HADOOP_HOME"] = hadoop_home
+        os.environ["PATH"] += os.pathsep + os.path.join(hadoop_home, "bin")
     
     spark = (SparkSession.builder
         .appName("NYC Taxi Bronze  to Silver")
