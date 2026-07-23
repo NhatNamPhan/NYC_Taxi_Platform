@@ -7,43 +7,44 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)
 ![Docker](https://img.shields.io/badge/Docker-Compose-cyan.svg)
 
-An **End-to-End Data Engineering Batch ETL Pipeline** for processing and analyzing NYC Yellow Taxi trip records (2024–2025). Built using **Medallion Architecture**, **PySpark**, **Apache Airflow**, **dbt**, **PostgreSQL**, and **Metabase**.
+An **End-to-End Batch ETL Data Platform** designed to ingest, process, transform, and analyze NYC Yellow Taxi trip records (2024–2025). The platform leverages the **Medallion Architecture**, **PySpark**, **PostgreSQL Data Warehouse**, **dbt (Data Build Tool)**, **Apache Airflow**, and **Metabase**.
 
 ---
 
 ## 📌 Table of Contents
 - [Architecture](#-architecture)
 - [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
+- [Project Layout](#-project-layout)
 - [Data Pipeline Layers](#-data-pipeline-layers)
-- [dbt Data Modeling](#-dbt-data-modeling)
-- [Quick Start & Setup](#-quick-start--setup)
-- [Airflow Orchestration](#-airflow-orchestration)
-- [Environment Variables](#-environment-variables)
+- [dbt Star Schema & Marts](#-dbt-star-schema--marts)
+- [Quick Start](#-quick-start)
+- [Pipeline Execution](#-pipeline-execution)
 
 ---
 
 ## 🏗 Architecture
 
-The platform follows the **Medallion Architecture** pattern to progressively clean, enrich, transform, and aggregate raw taxi trip records for analytics:
+The platform uses a **Medallion Architecture** (Bronze → Silver → Gold) to continuously refine raw trip records into analytical data marts:
 
 ```mermaid
 flowchart LR
-    A[NYC TLC Parquet Data 2024-2025] -->|ingestion/download_data.py| B[(Bronze Layer: Raw Parquet)]
-    B -->|spark/bronze_to_silver.py| C[(Silver Layer: Cleaned Parquet)]
-    C -->|spark/silver_to_gold.py + Taxi Zone Lookup CSV| D[(Gold Layer: Enriched Parquet)]
-    D -->|JDBC Overwrite| E[(PostgreSQL Warehouse: gold.trips)]
-    E -->|dbt run| F[dbt Data Marts]
-    F --> G[Staging Views]
-    G --> H[Kimball Star Schema: Dimensions & Facts]
-    H --> I[Marts: Hourly, Monthly, Revenue]
-    I --> J[Metabase BI Dashboard]
+    A[NYC TLC Parquet Storage] -->|Ingestion| B[(Bronze Layer: Raw Parquet)]
+    B -->|PySpark Validation & Cleaning| C[(Silver Layer: Partitioned Parquet)]
+    C -->|PySpark Enrichment & Feature Engineering| D[(Gold Layer: Enriched Parquet)]
+    D -->|JDBC Load| E[(PostgreSQL Warehouse)]
+    E -->|dbt Transformations| F[Staging Views]
+    F --> G[Kimball Dimensions & Facts]
+    G --> H[Analytics Data Marts]
+    H --> I[Metabase Dashboards]
 
     subgraph Airflow DAG: nyc_taxi_pipeline
         B
         C
         D
+        E
         F
+        G
+        H
     end
 ```
 
@@ -51,48 +52,47 @@ flowchart LR
 
 ## 🛠 Tech Stack
 
-| Layer / Process | Tool / Framework | Role & Description |
+| Layer | Technology | Purpose |
 |---|---|---|
-| **Data Ingestion** | Python (`requests`) | Downloads 24 monthly Parquet trip files (~20-25M rows) |
-| **Batch Processing** | Apache Spark (PySpark 3.5) | Distributed data validation, outlier removal, enrichment & feature engineering |
-| **Storage & Lakehouse** | Parquet (Medallion) | Bronze (Raw), Silver (Cleaned), Gold (Enriched) partitioned by `year/month` |
-| **Data Warehouse** | PostgreSQL 15 | Serves processed Gold tables and dbt data marts |
-| **Transformation** | dbt (data build tool) | Models data into Kimball Star Schema (Staging, Dimensions, Facts, Marts) |
-| **Orchestration** | Apache Airflow 2.9 | Automated end-to-end DAG execution (`download` → `silver` → `gold` → `dbt`) |
+| **Data Ingestion** | Python (`requests`) | Ingests monthly Parquet files (~20–25M rows) |
+| **Data Processing** | Apache Spark (PySpark 3.5) | Data validation, outlier filtering, feature engineering |
+| **Storage Layer** | Parquet (Medallion) | Bronze (Raw), Silver (Cleaned), Gold (Enriched) partitioned by `year/month` |
+| **Data Warehouse** | PostgreSQL 15 | Relational data warehouse serving gold analytics tables |
+| **Transformation** | dbt (data build tool) | Data modeling into Kimball Star Schema & business data marts |
+| **Orchestration** | Apache Airflow 2.9 | Automated end-to-end DAG execution |
 | **Containerization** | Docker & Docker Compose | Containerized Airflow Webserver, Scheduler, and Metabase BI |
-| **Visualization** | Metabase | Interactive dashboards and business intelligence reporting |
+| **Visualization** | Metabase | Interactive business dashboards and analytics reporting |
 
 ---
 
-## 📂 Project Structure
+## 📂 Project Layout
 
 ```
 nyc_taxi_platform/
 ├── dags/
-│   └── nyc_taxi_pipeline.py         # Airflow DAG defining execution workflow
+│   └── nyc_taxi_pipeline.py         # Airflow DAG workflow definition
 ├── spark/
-│   ├── bronze_to_silver.py          # PySpark job: Validation & Outlier Cleaning
-│   └── silver_to_gold.py            # PySpark job: Feature Engineering & JDBC Load
+│   ├── bronze_to_silver.py          # PySpark: Validation & Outlier Removal
+│   └── silver_to_gold.py            # PySpark: Feature Engineering & Warehouse Load
 ├── ingestion/
-│   └── download_data.py             # Downloader script for NYC TLC Parquet files
+│   └── download_data.py             # Data ingestion script for NYC TLC Parquet files
 ├── dbt/
 │   ├── models/
-│   │   ├── staging/                 # dbt Views for raw staging
-│   │   ├── dimensions/              # dim_location, dim_time
-│   │   ├── facts/                   # fact_trips
-│   │   └── marts/                   # mart_hourly_demand, mart_monthly_trends, mart_revenue_by_zone
-│   ├── dbt_project.yml              # dbt project configuration & materializations
-│   └── profiles.yml                 # dbt connection profile for PostgreSQL
+│   │   ├── staging/                 # Staging views (stg_trips, stg_zones)
+│   │   ├── dimensions/              # Dimension tables (dim_location, dim_time)
+│   │   ├── facts/                   # Fact tables (fact_trips)
+│   │   └── marts/                   # Business marts (hourly demand, monthly trends, zone revenue)
+│   ├── dbt_project.yml              # dbt configuration & materializations
+│   └── profiles.yml                 # Connection profiles for dbt
 ├── data/
-│   ├── bronze/                      # Partitioned raw data files
-│   ├── silver/                      # Partitioned cleaned data files
-│   ├── gold/                        # Partitioned enriched data files
-│   └── taxi_zone_lookup.csv         # Lookup table for NYC Boroughs & Zones
-├── Dockerfile                       # Airflow container build configuration
-├── docker-compose.yml               # Service setup for Airflow & Metabase
-├── requirements.txt                 # Python dependencies
-├── .env                             # Environment configuration
-└── README.md                        # Documentation
+│   ├── bronze/                      # Raw ingested files
+│   ├── silver/                      # Cleaned partitioned files
+│   ├── gold/                        # Enriched partitioned files
+│   └── taxi_zone_lookup.csv         # NYC Borough & Zone reference data
+├── Dockerfile                       # Airflow container build specification
+├── docker-compose.yml               # Multi-container service definitions
+├── requirements.txt                 # Python package dependencies
+└── .env.example                     # Environment template file
 ```
 
 ---
@@ -100,131 +100,93 @@ nyc_taxi_platform/
 ## 🔄 Data Pipeline Layers
 
 ### 1. Ingestion (`ingestion/download_data.py`)
-- Fetches monthly Yellow Taxi `.parquet` files for 2024–2025 directly from NYC TLC web storage.
-- Stores files in `data/bronze/year=YYYY/month=MM/`.
+- Fetches monthly Yellow Taxi trip records (2024–2025) from NYC TLC.
+- Saves raw `.parquet` files in `data/bronze/year=YYYY/month=MM/`.
 
-### 2. Bronze → Silver (`spark/bronze_to_silver.py`)
-- **Data Quality & Validation**:
-  - Sanitizes `PULocationID` & `DOLocationID` (maps values outside `[1, 265]` to `NULL`).
-  - Removes outliers and clock errors:
-    - `0 < trip_distance <= 500` miles
-    - `0 < fare_amount < $1,000`
-    - `1 <= passenger_count <= 8`
-    - `tip_amount >= 0`
-    - Pickup datetime strictly within `2024-01-01` to `2025-12-31`.
-- **Output**: Partitioned Parquet stored in `data/silver/`.
+### 2. Bronze → Silver Layer (`spark/bronze_to_silver.py`)
+- **Validation**: Ensures `PULocationID` and `DOLocationID` exist within valid ranges `[1, 265]`.
+- **Outlier Filtering**:
+  - Distance: `0 < trip_distance <= 500` miles.
+  - Fare Amount: `0 < fare_amount < $1,000`.
+  - Passengers: `1 <= passenger_count <= 8`.
+  - Pickup Timestamps: Restricted to valid timeframe (`2024-01-01` to `2025-12-31`).
+- **Output**: Partitioned Parquet files written to `data/silver/`.
 
-### 3. Silver → Gold (`spark/silver_to_gold.py`)
-- **Data Enrichment & Feature Engineering**:
-  - `LEFT JOIN` with `taxi_zone_lookup.csv` to attach `pickup_zone_name` and `pickup_borough`.
-  - Calculates `trip_duration_min` (trip length in minutes).
-  - Calculates `tip_percentage` (`(tip_amount / fare_amount) * 100`).
-  - Calculates `speed_mph` (`trip_distance / duration_hours`).
-  - Extracts temporal attributes (`hour`, `day_of_week`).
-- **Warehouse Load**: Writes enriched DataFrame to Parquet (`data/gold/`) and overwrites table `gold.trips` in PostgreSQL via JDBC.
+### 3. Silver → Gold Layer (`spark/silver_to_gold.py`)
+- **Enrichment**: `LEFT JOIN` with `taxi_zone_lookup.csv` for zone and borough details.
+- **Feature Engineering**:
+  - `trip_duration_min`: Trip duration calculated in minutes.
+  - `tip_percentage`: Tip relative to fare amount (`(tip_amount / fare_amount) * 100`).
+  - `speed_mph`: Average speed calculated in miles per hour.
+  - Temporal Attributes: Hour of day, day of week.
+- **Warehouse Load**: Partitioned Parquet output to `data/gold/` and JDBC load into PostgreSQL (`gold.trips`).
 
 ---
 
-## 📊 dbt Data Modeling
+## 📊 dbt Star Schema & Marts
 
-`dbt` transforms `gold.trips` into a **Kimball Star Schema**:
+`dbt` builds a **Kimball Star Schema** over the PostgreSQL data warehouse:
 
 - **Staging Layer** (`materialized='view'`):
-  - `stg_trips`, `stg_zones`: Cleaned view wrappers.
-- **Dimensions & Facts Layer** (`materialized='table'`):
-  - `dim_location`: Surrogate key, borough, zone, service zone.
+  - `stg_trips`: Formatted trip records with cleaned column names.
+  - `stg_zones`: Taxi location lookup views.
+- **Dimensions & Facts** (`materialized='table'`):
+  - `dim_location`: Surrogate key, location ID, borough, zone.
   - `dim_time`: Hour, day of week, weekend indicator.
-  - `fact_trips`: Key metrics (fare, tip, distance, duration, speed).
-- **Data Marts Layer** (`materialized='table'`):
-  - `mart_hourly_demand`: Aggregated pickup count, average speed, and average fare by hour & day of week.
-  - `mart_monthly_trends`: Monthly trip counts, total revenue, average tip percentage.
-  - `mart_revenue_by_zone`: Total revenue, total trips, and average fare per taxi zone.
+  - `fact_trips`: Trip metrics (distance, duration, fare, tip, speed).
+- **Data Marts** (`materialized='table'`):
+  - `mart_hourly_demand`: Aggregated pickup volumes, average speeds, and fares per hour.
+  - `mart_monthly_trends`: Monthly trip totals, revenue, and average tip percentage.
+  - `mart_revenue_by_zone`: Total revenue, trip volume, and average fare grouped by taxi zone.
 
 ---
 
-## 🚀 Quick Start & Setup
+## 🚀 Quick Start
 
 ### Prerequisites
+- [Docker & Docker Compose](https://docs.docker.com/get-docker/)
 - Python 3.10+
-- PostgreSQL 15+ running on port `5433` (or configured via `.env`)
-- Docker & Docker Compose
-- Java 8/11/17 (Required for PySpark local execution)
 
-### 1. Clone & Environment Configuration
+### 1. Environment Setup
+Clone the repository and copy the environment template:
 ```bash
 git clone https://github.com/NhatNamPhan/NYC_Taxi_Platform.git
 cd nyc_taxi_platform
 
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
+# Copy environment template
+cp .env.example .env
 ```
 
-Create a `.env` file in the root directory:
-```env
-DB_HOST=localhost
-DB_PORT=5433
-DB_NAME=nyc_taxi
-DB_USER=postgres
-DB_PASSWORD=1234
-```
+Edit `.env` to configure database credentials if necessary.
 
-### 2. Start Services with Docker
+### 2. Start Infrastructure
+Run Docker Compose to start Airflow and Metabase services:
 ```bash
 docker-compose up -d
 ```
-Services deployed:
+
+Service URLs:
 - **Airflow Webserver**: [http://localhost:8080](http://localhost:8080)
 - **Metabase BI**: [http://localhost:3000](http://localhost:3000)
 
-### 3. Run Ingestion & Manual Spark Pipeline
-```bash
-# Step 1: Download raw data
-python ingestion/download_data.py
-
-# Step 2: Run Spark Bronze to Silver
-python spark/bronze_to_silver.py
-
-# Step 3: Run Spark Silver to Gold
-python spark/silver_to_gold.py
-
-# Step 4: Run dbt Transformations
-cd dbt
-dbt run --profiles-dir .
-```
-
 ---
 
-## ⚙️ Airflow Orchestration
+## ⚙️ Pipeline Execution
 
-Access Airflow at `http://localhost:8080` (Default credentials: `airflow / airflow` or auto-login depending on `.env`).
-
-The DAG `nyc_taxi_pipeline` automates all 4 steps sequentially:
-1. `download_data_bronze` (`BashOperator`)
-2. `spark_bronze_to_silver` (`BashOperator`)
-3. `spark_silver_to_gold` (`BashOperator`)
-4. `dbt_transform_marts` (`BashOperator`)
-
-To trigger manually via Airflow CLI:
+### Automated Execution via Airflow
+Log in to Airflow at `http://localhost:8080` and enable/trigger the DAG:
 ```bash
+# Trigger the DAG via Airflow CLI inside container or local environment
 airflow dags trigger nyc_taxi_pipeline
 ```
 
----
-
-## 📈 Metabase BI Integration
-
-1. Open `http://localhost:3000` in your browser.
-2. Add PostgreSQL Database connection using host `host.docker.internal` (or container IP), database `nyc_taxi`.
-3. Build dashboards using tables from the `marts` schema:
-   - Demand heatmaps by hour and pickup location.
-   - Monthly revenue and tip percentage trends.
-   - Top revenue-generating taxi zones in NYC.
+The DAG runs the end-to-end task sequence:
+1. `download_data_bronze`
+2. `spark_bronze_to_silver`
+3. `spark_silver_to_gold`
+4. `dbt_transform_marts`
 
 ---
 
 ## 📜 License
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License.
