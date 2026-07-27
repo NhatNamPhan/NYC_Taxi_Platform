@@ -7,7 +7,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)
 ![Docker](https://img.shields.io/badge/Docker-Compose-cyan.svg)
 
-An **End-to-End Batch ETL Data Platform** designed to ingest, process, transform, and analyze NYC Yellow Taxi trip records (2024–2025). The platform leverages the **Medallion Architecture**, **PySpark**, **PostgreSQL Data Warehouse**, **dbt (Data Build Tool)**, **Apache Airflow**, and **Metabase**.
+An **End-to-End Batch ETL Data Platform** designed to ingest, process, transform, and analyze NYC Yellow Taxi trip records (2024–2025). The platform leverages the **Medallion Architecture**, **PySpark**, **PostgreSQL Data Warehouse**, **dbt (Data Build Tool)**, **Apache Airflow**, and **Metabase/PowerBI**.
 
 ---
 
@@ -16,7 +16,7 @@ An **End-to-End Batch ETL Data Platform** designed to ingest, process, transform
 - [Tech Stack](#-tech-stack)
 - [Project Layout](#-project-layout)
 - [Data Pipeline Layers](#-data-pipeline-layers)
-- [dbt Star Schema & Marts](#-dbt-star-schema--marts)
+- [dbt Star Schema & Business Data Marts](#-dbt-star-schema--business-data-marts)
 - [Quick Start](#-quick-start)
 - [Pipeline Execution](#-pipeline-execution)
 
@@ -34,8 +34,8 @@ flowchart LR
     D -->|JDBC Load| E[(PostgreSQL Warehouse)]
     E -->|dbt Transformations| F[Staging Views]
     F --> G[Kimball Dimensions & Facts]
-    G --> H[Analytics Data Marts]
-    H --> I[Metabase Dashboards]
+    G --> H[7 Business Data Marts]
+    H --> I[Power BI / Metabase Dashboards]
 
     subgraph Airflow DAG: nyc_taxi_pipeline
         B
@@ -58,10 +58,10 @@ flowchart LR
 | **Data Processing** | Apache Spark (PySpark 3.5) | Data validation, outlier filtering, feature engineering |
 | **Storage Layer** | Parquet (Medallion) | Bronze (Raw), Silver (Cleaned), Gold (Enriched) partitioned by `year/month` |
 | **Data Warehouse** | PostgreSQL 15 | Relational data warehouse serving gold analytics tables |
-| **Transformation** | dbt (data build tool) | Data modeling into Kimball Star Schema & business data marts |
+| **Transformation** | dbt (data build tool) | Data modeling into Kimball Star Schema & 7 Business Data Marts |
 | **Orchestration** | Apache Airflow 2.9 | Automated end-to-end DAG execution |
 | **Containerization** | Docker & Docker Compose | Containerized Airflow Webserver, Scheduler, and Metabase BI |
-| **Visualization** | Metabase | Interactive business dashboards and analytics reporting |
+| **Visualization** | Power BI / Metabase | Interactive business dashboards and analytics reporting |
 
 ---
 
@@ -81,7 +81,14 @@ nyc_taxi_platform/
 │   │   ├── staging/                 # Staging views (stg_trips, stg_zones)
 │   │   ├── dimensions/              # Dimension tables (dim_location, dim_time)
 │   │   ├── facts/                   # Fact tables (fact_trips)
-│   │   └── marts/                   # Business marts (hourly demand, monthly trends, zone revenue)
+│   │   └── marts/                   # 7 Business Data Marts
+│   │       ├── mart_monthly_trends.sql
+│   │       ├── mart_hourly_demand.sql
+│   │       ├── mart_day_of_week.sql
+│   │       ├── mart_revenue_by_zone.sql
+│   │       ├── mart_route_analysis.sql
+│   │       ├── mart_airport_vs_city.sql
+│   │       └── mart_payment_insights.sql
 │   ├── dbt_project.yml              # dbt configuration & materializations
 │   └── profiles.yml                 # Connection profiles for dbt
 ├── data/
@@ -123,21 +130,26 @@ nyc_taxi_platform/
 
 ---
 
-## 📊 dbt Star Schema & Marts
+## 📊 dbt Star Schema & Business Data Marts
 
 `dbt` builds a **Kimball Star Schema** over the PostgreSQL data warehouse:
 
 - **Staging Layer** (`materialized='view'`):
-  - `stg_trips`: Formatted trip records with cleaned column names.
+  - `stg_trips`: Formatted trip records with cleaned column names and generated surrogate trip IDs.
   - `stg_zones`: Taxi location lookup views.
 - **Dimensions & Facts** (`materialized='table'`):
-  - `dim_location`: Surrogate key, location ID, borough, zone.
-  - `dim_time`: Hour, day of week, weekend indicator.
-  - `fact_trips`: Trip metrics (distance, duration, fare, tip, speed).
-- **Data Marts** (`materialized='table'`):
-  - `mart_hourly_demand`: Aggregated pickup volumes, average speeds, and fares per hour.
-  - `mart_monthly_trends`: Monthly trip totals, revenue, and average tip percentage.
-  - `mart_revenue_by_zone`: Total revenue, trip volume, and average fare grouped by taxi zone.
+  - `dim_location`: Location ID, borough, zone, and service zone attributes.
+  - `dim_time`: Pickup timestamp granularity, hour, day of week, day name, and weekend indicators.
+  - `fact_trips`: Key numerical trip metrics (distance, duration, fare, tip, total amount, speed).
+
+- **7 Business Data Marts** (`materialized='table'`):
+  1. `mart_monthly_trends`: Month-over-month comparison of trip counts, total revenue, and average trip distance (2024 vs 2025).
+  2. `mart_hourly_demand`: Hourly demand, trip count, average fare, duration, and speed across 24 hours per borough.
+  3. `mart_day_of_week`: Trip volume and revenue performance broken down by day of the week (Monday–Sunday) & Weekday vs Weekend.
+  4. `mart_revenue_by_zone`: Total revenue, trip volume, base fare, and average tip percentage grouped by pickup zone.
+  5. `mart_route_analysis`: Origin-Destination (OD) route matrix (Pickup Zone → Dropoff Zone) measuring popular routes, speeds, and travel durations.
+  6. `mart_airport_vs_city`: Comparative analysis between Airport trips (JFK, Newark, LaGuardia) and City trips, capturing airport fees and fare margins.
+  7. `mart_payment_insights`: Revenue, tip distribution, and average fare metrics categorized by payment methods (Credit Card, Cash, No Charge, Dispute).
 
 ---
 
@@ -172,6 +184,22 @@ Service URLs:
 ---
 
 ## ⚙️ Pipeline Execution
+
+### Executing dbt Transformations
+Navigate into the `dbt` directory and run:
+
+```bash
+cd dbt
+
+# Build all seeds, models, and run tests
+dbt build
+
+# Or run models directly
+dbt run
+
+# Run only business data marts
+dbt run --select marts
+```
 
 ### Automated Execution via Airflow
 Log in to Airflow at `http://localhost:8080` and enable/trigger the DAG:
