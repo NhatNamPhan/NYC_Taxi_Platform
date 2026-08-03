@@ -2955,3 +2955,11 @@ File Path                               PID    Runtime      # DAGs    # Errors  
 ================================================================================
 [2026-08-03T08:04:13.003+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
 [2026-08-03T08:04:13.076+0000] {manager.py:740} INFO - There are 1 files in /opt/airflow/dags
+[2026-08-03T08:04:43.453+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                 PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+--------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/nyc_taxi_pipeline.py    944  2.71s             1           0  9.27s           2026-08-03T08:04:08
+================================================================================
