@@ -30,10 +30,7 @@ def main():
     print(f"Đang đọc dữ liệu từ {input_path}")
     df = spark.read.parquet(input_path)
     
-    print(f'Tổng số dòng đọc đươc từ Bronze: {df.count():,}')
-    #df.printSchema()
-    
-    # 1. Chuẩn hóa mã vùng: nếu nằm ngoài khoảng [1, 265] thì đưa về NULL
+    # 1. Chuẩn hóa mã vùng
     df_validated = df.withColumn(
         "PULocationID", 
         F.when((F.col("PULocationID") >= 1) & (F.col("PULocationID") <= 265), F.col("PULocationID")).otherwise(F.lit(None))
@@ -42,7 +39,7 @@ def main():
         F.when((F.col("DOLocationID") >= 1) & (F.col("DOLocationID") <= 265), F.col("DOLocationID")).otherwise(F.lit(None))
     )
 
-    # 2. Điều kiện lọc loại bỏ các dòng bị lỗi (Outliers và lỗi đồng hồ)
+    # 2. Điều kiện lọc loại bỏ dòng lỗi
     cleaned_condition = (
         (F.col("trip_distance") > 0) & (F.col("trip_distance") <= 500) &
         (F.col("fare_amount") > 0) & (F.col("fare_amount") < 1000) &
@@ -54,13 +51,9 @@ def main():
     )
     
     df_cleaned = df_validated.filter(cleaned_condition)
-    
+        
     # 3. Thống kê số lượng dòng bị lọc
     total_cleaned_rows = df_cleaned.count()
-    dropped_rows = df.count() - total_cleaned_rows
-    print(f"Số lượng dòng bị loại bỏ: {dropped_rows:,}")
-    print(f"Số lượng dòng còn lại đưa vào Bronze: {total_cleaned_rows:,}")
-    
     # 4. Ghi dữ liệu đã làm sạch vào thư mục Silver với phân vùng year/month
     output_path = os.path.join(project_root, "data", "silver")
     print(f"Đang ghi dữ liệu Silver vào {output_path}")

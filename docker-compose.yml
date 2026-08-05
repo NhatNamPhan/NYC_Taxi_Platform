@@ -4,7 +4,7 @@ services:
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:1234@host.docker.internal:5433/airflow
-      AIRFLOW__CORE__FERNET_KEY: ''
+      AIRFLOW__CORE__FERNET_KEY: '4YAJSGW9Nib78qJJaDjWTlxodK5sa_ddDtrwhGwB0d4='
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       DB_HOST: host.docker.internal
@@ -25,7 +25,7 @@ services:
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:1234@host.docker.internal:5433/airflow
-      AIRFLOW__CORE__FERNET_KEY: ''
+      AIRFLOW__CORE__FERNET_KEY: '4YAJSGW9Nib78qJJaDjWTlxodK5sa_ddDtrwhGwB0d4='
       DB_HOST: host.docker.internal
       DB_PORT: 5433
       DB_NAME: nyc_taxi

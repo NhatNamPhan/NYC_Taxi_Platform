@@ -43,7 +43,7 @@ with DAG(
     # Task 4: Chạy dbt chuyển đổi các bảng Marts
     dbt_run = BashOperator(
         task_id='dbt_transform_marts',
-        bash_command='cd /opt/airflow/dbt && dbt run --profiles-dir .',
+        bash_command='cd /opt/airflow/dbt && dbt run --threads 4 --profiles-dir .',
     )
 
     # Định nghĩa luồng chạy tuần tự

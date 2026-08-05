@@ -45,7 +45,7 @@ def main():
     
     # 5. Thực hiện LEFT JOIN dữ liệu  Silver với bảng Zone Lookup theo PULocationID
     df_joined = df_silver.join(
-        zone_df.alias("pickup_zone"),
+        F.broadcast(zone_df).alias("pickup_zone"),
         df_silver.PULocationID == F.col("pickup_zone.LocationID"),
         "left"
     ).withColumnRenamed("Zone", "pickup_zone_name") \
@@ -120,6 +120,8 @@ def main():
         .option("user", db_user) \
         .option("password", db_password) \
         .option("driver", "org.postgresql.Driver") \
+        .option("batchsize", "20000") \
+        .option("numPartitions", "4") \
         .option("truncate", "true") \
         .mode("overwrite") \
         .save()
