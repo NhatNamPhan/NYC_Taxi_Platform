@@ -142,14 +142,17 @@ nyc_taxi_platform/
   - `dim_time`: Pickup timestamp granularity, hour, day of week, day name, and weekend indicators.
   - `fact_trips`: Key numerical trip metrics (distance, duration, fare, tip, total amount, speed).
 
-- **7 Business Data Marts** (`materialized='table'`):
-  1. `mart_monthly_trends`: Month-over-month comparison of trip counts, total revenue, and average trip distance (2024 vs 2025).
-  2. `mart_hourly_demand`: Hourly demand, trip count, average fare, duration, and speed across 24 hours per borough.
-  3. `mart_day_of_week`: Trip volume and revenue performance broken down by day of the week (Monday–Sunday) & Weekday vs Weekend.
-  4. `mart_revenue_by_zone`: Total revenue, trip volume, base fare, and average tip percentage grouped by pickup zone.
-  5. `mart_route_analysis`: Origin-Destination (OD) route matrix (Pickup Zone → Dropoff Zone) measuring popular routes, speeds, and travel durations.
-  6. `mart_airport_vs_city`: Comparative analysis between Airport trips (JFK, Newark, LaGuardia) and City trips, capturing airport fees and fare margins.
-  7. `mart_payment_insights`: Revenue, tip distribution, and average fare metrics categorized by payment methods (Credit Card, Cash, No Charge, Dispute).
+- **8 Business Data Marts** (`materialized='table'`):
+  1. `mart_kpi_summary`: Pre-aggregated overall platform KPIs for instant scorecard dashboard rendering.
+  2. `mart_monthly_trends`: Month-over-month comparison of trip counts, total revenue, and average trip distance (2024 vs 2025).
+  3. `mart_hourly_demand`: Hourly demand, trip count, average fare, duration, and speed across 24 hours per borough.
+  4. `mart_day_of_week`: Trip volume and revenue performance broken down by day of the week (Monday–Sunday) & Weekday vs Weekend.
+  5. `mart_revenue_by_zone`: Total revenue, trip volume, base fare, and average tip percentage grouped by pickup zone.
+  6. `mart_route_analysis`: Origin-Destination (OD) route matrix (Pickup Zone → Dropoff Zone) measuring popular routes, speeds, and travel durations.
+  7. `mart_airport_vs_city`: Comparative analysis between Airport trips (JFK, Newark, LaGuardia) and City trips, capturing airport fees and fare margins.
+  8. `mart_payment_insights`: Revenue, tip distribution, and average fare metrics categorized by payment methods (Credit Card, Cash, No Charge, Dispute).
+
+> 💡 **Dashboard Guide**: For detailed 4-tier dashboard layout architecture, chart specifications, and business insights, refer to [DASHBOARD_GUIDE.md](file:///e:/Python/DataEngineer/MiniProject/nyc_taxi_platform/DASHBOARD_GUIDE.md).
 
 ---
 
