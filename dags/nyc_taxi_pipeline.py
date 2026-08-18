@@ -40,10 +40,10 @@ with DAG(
         bash_command='python /opt/airflow/spark/silver_to_gold.py',
     )
 
-    # Task 4: Chạy dbt chuyển đổi các bảng Marts
+    # Task 4: Chạy dbt build (nạp seeds và chuyển đổi các bảng Marts)
     dbt_run = BashOperator(
         task_id='dbt_transform_marts',
-        bash_command='cd /opt/airflow/dbt && dbt run --threads 4 --profiles-dir .',
+        bash_command='cd /opt/airflow/dbt && dbt build --threads 4 --profiles-dir .',
     )
 
     # Định nghĩa luồng chạy tuần tự

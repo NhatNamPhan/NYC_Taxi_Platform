@@ -3,10 +3,10 @@
 
 SELECT
     CASE
-        WHEN s.payment_type = 1 THEN 'Credit Card'
-        WHEN s.payment_type = 2 THEN 'Cash'
-        WHEN s.payment_type = 3 THEN 'No Charge'
-        WHEN s.payment_type = 4 THEN 'Dispute'
+        WHEN t.payment_type = 1 THEN 'Credit Card'
+        WHEN t.payment_type = 2 THEN 'Cash'
+        WHEN t.payment_type = 3 THEN 'No Charge'
+        WHEN t.payment_type = 4 THEN 'Dispute'
         ELSE 'Unknown'
     END AS payment_method,
     l.borough AS pickup_borough,
@@ -16,7 +16,6 @@ SELECT
     ROUND(AVG(t.tip_percentage)::NUMERIC, 2) AS avg_tip_percentage,
     ROUND(AVG(t.fare_amount)::NUMERIC, 2) AS avg_fare_amount
 FROM {{ ref('fact_trips') }} t
-JOIN {{ ref('stg_trips') }} s ON t.trip_id = s.trip_id
 LEFT JOIN {{ ref('dim_location') }} l on t.pickup_location_id = l.location_id
 GROUP BY 1, 2
 ORDER BY total_revenue DESC
