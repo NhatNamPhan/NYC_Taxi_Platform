@@ -21,6 +21,8 @@ dbt/target/
 dbt/dbt_packages/
 spark-warehouse/
 metabase.db/
+metabase-data/
+*.pid
 
 # IDE configs
 .vscode/
