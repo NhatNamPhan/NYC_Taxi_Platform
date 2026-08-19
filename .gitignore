@@ -24,6 +24,7 @@ metabase.db/
 metabase-data/
 *.pid
 
+
 # IDE configs
 .vscode/
 .idea/
