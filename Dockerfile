@@ -8,5 +8,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 USER airflow
-# Cài đặt PySpark, dbt-postgres và các thư viện cần thiết
-RUN pip install --no-cache-dir pyspark==3.5.1 "dbt-core<2.0" "dbt-postgres==1.8.0" requests==2.32.4 psycopg2-binary
+# Cài đặt các thư viện phụ thuộc từng bước để tối ưu Docker cache & network retries
+RUN pip install --no-cache-dir --retries 10 --timeout 1000 requests==2.32.4 psycopg2-binary
+RUN pip install --no-cache-dir --retries 10 --timeout 1000 "dbt-postgres==1.8.0"
+RUN pip install --no-cache-dir --retries 10 --timeout 1000 pyspark==3.5.1
