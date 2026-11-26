@@ -1,0 +1,12 @@
+.git
+.venv
+.env
+.env.*
+data
+logs
+hadoop
+dbt/target
+dbt/logs
+**/__pycache__
+.pytest_cache
+.runtime

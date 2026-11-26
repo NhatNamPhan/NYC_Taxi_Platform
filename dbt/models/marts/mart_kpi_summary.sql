@@ -1,10 +1,7 @@
--- Mart model: mart_kpi_summary
--- Pre-aggregated overall platform KPIs for instant dashboard loading (0.001s)
-
-SELECT
-    COUNT(*) AS total_trips,
-    ROUND(SUM(total_amount)::NUMERIC, 2) AS total_revenue,
-    ROUND(AVG(fare_amount)::NUMERIC, 2) AS avg_fare_amount,
-    ROUND(AVG(tip_percentage)::NUMERIC, 2) AS avg_tip_percentage,
-    ROUND(AVG(trip_distance)::NUMERIC, 2) AS avg_trip_distance
-FROM {{ ref('fact_trips') }}
+SELECT t.source_month AS month_start, l.borough AS pickup_borough,
+    {{ trip_metrics() }}, MAX(m.loaded_at) AS data_updated_at
+FROM {{ ref('fact_trips') }} t
+LEFT JOIN {{ ref('dim_location') }} l ON t.pickup_location_id = l.location_id
+JOIN {{ source('gold', 'load_manifest') }} m ON t.source_month = m.source_month
+WHERE {{ fact_month_filter() }}
+GROUP BY 1, 2

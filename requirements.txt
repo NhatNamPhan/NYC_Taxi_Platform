@@ -1,5 +1,5 @@
 pyspark==3.5.1
-dbt-postgres==1.8.0
 requests==2.32.4
-pandas==3.0.0
-psycopg2-binary
+pyarrow==17.0.0
+python-dotenv==1.0.1
+psycopg2-binary==2.9.10

@@ -1,18 +1,3 @@
--- Dimension model: dim_time
--- Chi tiết hóa thời gian đón khách từ stg_trips
-
-{{ config(materialized='table') }}
-
-SELECT DISTINCT
-    tpep_pickup_datetime AS datetime_id,
-    EXTRACT(YEAR FROM tpep_pickup_datetime) AS year,
-    EXTRACT(MONTH FROM tpep_pickup_datetime) AS month,
-    EXTRACT(DAY FROM tpep_pickup_datetime) AS day,
-    EXTRACT(HOUR FROM tpep_pickup_datetime) AS hour,
-    EXTRACT(DOW FROM tpep_pickup_datetime) AS day_of_week,
-    TO_CHAR(tpep_pickup_datetime, 'FMDay') AS day_name,
-    CASE 
-        WHEN EXTRACT(DOW FROM tpep_pickup_datetime) IN (0, 6) THEN TRUE 
-        ELSE FALSE 
-    END AS is_weekend
-FROM {{ ref('stg_trips') }}
+-- Hour grain: 24 rows, independent of fact volume.
+SELECT hour AS hour_id, hour, LPAD(hour::TEXT, 2, '0') || ':00' AS hour_label
+FROM GENERATE_SERIES(0, 23) AS hours(hour)

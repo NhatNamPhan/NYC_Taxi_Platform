@@ -1,223 +1,131 @@
-# 🚖 NYC Taxi Analytics Platform
+# NYC Taxi Analytics Platform
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
-![Apache Spark](https://img.shields.io/badge/Apache%20Spark-3.5-orange.svg)
-![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-2.9-green.svg)
-![dbt](https://img.shields.io/badge/dbt-Postgres-red.svg)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)
-![Docker](https://img.shields.io/badge/Docker-Compose-cyan.svg)
+Monthly batch analytics for NYC Yellow Taxi records using **Spark, PostgreSQL, dbt, Airflow and Apache Superset**.
 
-An **End-to-End Batch ETL Data Platform** designed to ingest, process, transform, and analyze NYC Yellow Taxi trip records (2024–2025). The platform leverages the **Medallion Architecture**, **PySpark**, **PostgreSQL Data Warehouse**, **dbt (Data Build Tool)**, **Apache Airflow**, and **Metabase/PowerBI**.
-
----
-
-## 📌 Table of Contents
-- [Architecture](#-architecture)
-- [Tech Stack](#-tech-stack)
-- [Project Layout](#-project-layout)
-- [Data Pipeline Layers](#-data-pipeline-layers)
-- [dbt Star Schema & Business Data Marts](#-dbt-star-schema--business-data-marts)
-- [Quick Start](#-quick-start)
-- [Pipeline Execution](#-pipeline-execution)
-
----
-
-## 🏗 Architecture
-
-The platform uses a **Medallion Architecture** (Bronze → Silver → Gold) to continuously refine raw trip records into analytical data marts:
-
-```mermaid
-flowchart LR
-    A[NYC TLC Parquet Storage] -->|Ingestion| B[(Bronze Layer: Raw Parquet)]
-    B -->|PySpark Validation & Cleaning| C[(Silver Layer: Partitioned Parquet)]
-    C -->|PySpark Enrichment & Feature Engineering| D[(Gold Layer: Enriched Parquet)]
-    D -->|JDBC Load| E[(PostgreSQL Warehouse)]
-    E -->|dbt Transformations| F[Staging Views]
-    F --> G[Kimball Dimensions & Facts]
-    G --> H[7 Business Data Marts]
-    H --> I[Power BI / Metabase Dashboards]
-
-    subgraph Airflow DAG: nyc_taxi_pipeline
-        B
-        C
-        D
-        E
-        F
-        G
-        H
-    end
+```text
+TLC Parquet -> Bronze -> Silver + quarantine -> Gold Parquet
+                                      -> JDBC staging -> gold.trips
+                                      -> dbt staging/core/mart -> Superset
 ```
 
----
+## Quick start (Windows / PowerShell)
 
-## 🛠 Tech Stack
+Requirements: Docker Desktop with Linux containers, Docker Compose, Python 3.10+ for environment generation. Allow at least 6-8 GB RAM for the complete local stack; start with one month.
 
-| Layer | Technology | Purpose |
+```powershell
+python scripts/setup_env.py
+docker compose --env-file .env.compose up --build -d
+```
+
+This creates **new** container databases in the `nyc-taxi-platform_postgres_data` volume. Your existing PostgreSQL on port 5433 and existing `.env` are not used or migrated. The warehouse is exposed at `localhost:5434` by default.
+
+| Service | URL | Login |
 |---|---|---|
-| **Data Ingestion** | Python (`requests`) | Ingests monthly Parquet files (~20–25M rows) |
-| **Data Processing** | Apache Spark (PySpark 3.5) | Data validation, outlier filtering, feature engineering |
-| **Storage Layer** | Parquet (Medallion) | Bronze (Raw), Silver (Cleaned), Gold (Enriched) partitioned by `year/month` |
-| **Data Warehouse** | PostgreSQL 15 | Relational data warehouse serving gold analytics tables |
-| **Transformation** | dbt (data build tool) | Data modeling into Kimball Star Schema & 7 Business Data Marts |
-| **Orchestration** | Apache Airflow 2.9 | Automated end-to-end DAG execution |
-| **Containerization** | Docker & Docker Compose | Containerized Airflow Webserver, Scheduler, and Metabase BI |
-| **Visualization** | Power BI / Metabase | Interactive business dashboards and analytics reporting |
+| Airflow | http://localhost:8080 | `admin`, password `AIRFLOW_ADMIN_PASSWORD` in `.env.compose` |
+| Superset | http://localhost:8088 | `admin`, password `SUPERSET_ADMIN_PASSWORD` in `.env.compose` |
 
----
+Secrets are generated locally in the ignored `.env.compose`. Keep that file between restarts. Database bootstrap runs only when the PostgreSQL volume is first created; editing a password in the file alone does not rotate an existing database password.
 
-## 📂 Project Layout
+## Run a selected month
 
-```
-nyc_taxi_platform/
-├── dags/
-│   └── nyc_taxi_pipeline.py         # Airflow DAG workflow definition
-├── spark/
-│   ├── bronze_to_silver.py          # PySpark: Validation & Outlier Removal
-│   └── silver_to_gold.py            # PySpark: Feature Engineering & Warehouse Load
-├── ingestion/
-│   └── download_data.py             # Data ingestion script for NYC TLC Parquet files
-├── dbt/
-│   ├── models/
-│   │   ├── staging/                 # Staging views (stg_trips, stg_zones)
-│   │   ├── dimensions/              # Dimension tables (dim_location, dim_time)
-│   │   ├── facts/                   # Fact tables (fact_trips)
-│   │   └── marts/                   # 7 Business Data Marts
-│   │       ├── mart_monthly_trends.sql
-│   │       ├── mart_hourly_demand.sql
-│   │       ├── mart_day_of_week.sql
-│   │       ├── mart_revenue_by_zone.sql
-│   │       ├── mart_route_analysis.sql
-│   │       ├── mart_airport_vs_city.sql
-│   │       └── mart_payment_insights.sql
-│   ├── dbt_project.yml              # dbt configuration & materializations
-│   └── profiles.yml                 # Connection profiles for dbt
-├── data/
-│   ├── bronze/                      # Raw ingested files
-│   ├── silver/                      # Cleaned partitioned files
-│   ├── gold/                        # Enriched partitioned files
-│   └── taxi_zone_lookup.csv         # NYC Borough & Zone reference data
-├── Dockerfile                       # Airflow container build specification
-├── docker-compose.yml               # Multi-container service definitions
-├── requirements.txt                 # Python package dependencies
-└── .env.example                     # Environment template file
+Open Airflow, unpause `nyc_taxi_pipeline`, then trigger it with `start_month=2025-01`, `end_month=2025-01`. Alternatively:
+
+```powershell
+docker compose --env-file .env.compose exec airflow-scheduler python -m pipeline.trigger --start-month 2025-01 --end-month 2025-01
 ```
 
----
+For a direct foreground run without waiting for the scheduler:
 
-## 🔄 Data Pipeline Layers
-
-### 1. Ingestion (`ingestion/download_data.py`)
-- Fetches monthly Yellow Taxi trip records (2024–2025) from NYC TLC.
-- Saves raw `.parquet` files in `data/bronze/year=YYYY/month=MM/`.
-
-### 2. Bronze → Silver Layer (`spark/bronze_to_silver.py`)
-- **Validation**: Ensures `PULocationID` and `DOLocationID` exist within valid ranges `[1, 265]`.
-- **Outlier Filtering**:
-  - Distance: `0 < trip_distance <= 500` miles.
-  - Fare Amount: `0 < fare_amount < $1,000`.
-  - Passengers: `1 <= passenger_count <= 8`.
-  - Pickup Timestamps: Restricted to valid timeframe (`2024-01-01` to `2025-12-31`).
-- **Output**: Partitioned Parquet files written to `data/silver/`.
-
-### 3. Silver → Gold Layer (`spark/silver_to_gold.py`)
-- **Enrichment**: `LEFT JOIN` with `taxi_zone_lookup.csv` for zone and borough details.
-- **Feature Engineering**:
-  - `trip_duration_min`: Trip duration calculated in minutes.
-  - `tip_percentage`: Tip relative to fare amount (`(tip_amount / fare_amount) * 100`).
-  - `speed_mph`: Average speed calculated in miles per hour.
-  - Temporal Attributes: Hour of day, day of week.
-- **Warehouse Load**: Partitioned Parquet output to `data/gold/` and JDBC load into PostgreSQL (`gold.trips`).
-
----
-
-## 📊 dbt Star Schema & Business Data Marts
-
-`dbt` builds a **Kimball Star Schema** over the PostgreSQL data warehouse:
-
-- **Staging Layer** (`materialized='view'`):
-  - `stg_trips`: Formatted trip records with cleaned column names and generated surrogate trip IDs.
-  - `stg_zones`: Taxi location lookup views.
-- **Dimensions & Facts** (`materialized='table'`):
-  - `dim_location`: Location ID, borough, zone, and service zone attributes.
-  - `dim_time`: Pickup timestamp granularity, hour, day of week, day name, and weekend indicators.
-  - `fact_trips`: Key numerical trip metrics (distance, duration, fare, tip, total amount, speed).
-
-- **8 Business Data Marts** (`materialized='table'`):
-  1. `mart_kpi_summary`: Pre-aggregated overall platform KPIs for instant scorecard dashboard rendering.
-  2. `mart_monthly_trends`: Month-over-month comparison of trip counts, total revenue, and average trip distance (2024 vs 2025).
-  3. `mart_hourly_demand`: Hourly demand, trip count, average fare, duration, and speed across 24 hours per borough.
-  4. `mart_day_of_week`: Trip volume and revenue performance broken down by day of the week (Monday–Sunday) & Weekday vs Weekend.
-  5. `mart_revenue_by_zone`: Total revenue, trip volume, base fare, and average tip percentage grouped by pickup zone.
-  6. `mart_route_analysis`: Origin-Destination (OD) route matrix (Pickup Zone → Dropoff Zone) measuring popular routes, speeds, and travel durations.
-  7. `mart_airport_vs_city`: Comparative analysis between Airport trips (JFK, Newark, LaGuardia) and City trips, capturing airport fees and fare margins.
-  8. `mart_payment_insights`: Revenue, tip distribution, and average fare metrics categorized by payment methods (Credit Card, Cash, No Charge, Dispute).
-
-> 💡 **Dashboard Guide**: For detailed 4-tier dashboard layout architecture, chart specifications, and business insights, refer to [DASHBOARD_GUIDE.md](file:///e:/Python/DataEngineer/MiniProject/nyc_taxi_platform/DASHBOARD_GUIDE.md).
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-- [Docker & Docker Compose](https://docs.docker.com/get-docker/)
-- Python 3.10+
-
-### 1. Environment Setup
-Clone the repository and copy the environment template:
-```bash
-git clone https://github.com/NhatNamPhan/NYC_Taxi_Platform.git
-cd nyc_taxi_platform
-
-# Copy environment template
-cp .env.example .env
+```powershell
+docker compose --env-file .env.compose exec airflow-scheduler python -m ingestion.download_data --start-month 2025-01 --end-month 2025-01
+docker compose --env-file .env.compose exec airflow-scheduler python -m spark.bronze_to_silver --start-month 2025-01 --end-month 2025-01
+docker compose --env-file .env.compose exec airflow-scheduler python -m spark.silver_to_gold --start-month 2025-01 --end-month 2025-01
+docker compose --env-file .env.compose exec -e PIPELINE_START_MONTH=2025-01 -e PIPELINE_END_MONTH=2025-01 airflow-scheduler dbt build --project-dir /opt/airflow/dbt --profiles-dir /opt/airflow/dbt
 ```
 
-Edit `.env` to configure database credentials if necessary.
+Do not run the foreground workflow while a DAG run is writing the same local data. Airflow itself serializes DAG runs and tasks. Select `2024-01` through `2025-12` for the full historical rebuild after the single-month run succeeds.
 
-### 2. Start Infrastructure
-Run Docker Compose to start Airflow and Metabase services:
-```bash
-docker-compose up -d
+## Create the Superset dashboards
+
+After a successful `dbt build`:
+
+```powershell
+docker compose --env-file .env.compose --profile tools run --rm superset-assets
 ```
 
-Service URLs:
-- **Airflow Webserver**: [http://localhost:8080](http://localhost:8080)
-- **Metabase BI**: [http://localhost:3000](http://localhost:3000)
+The command connects Superset to the warehouse with **`bi_reader`**, which can only select from `mart`, and provisions three dashboards:
 
----
+- Revenue overview: revenue, trip count, average fare, recorded credit-card tip percentage and monthly trend.
+- Demand and locations: hourly demand, top zones and day-of-week totals.
+- Routes and payments: top routes, airport/city comparison and payment methods.
 
-## ⚙️ Pipeline Execution
+Every dashboard has a month-range filter. Run provisioning again to update the managed charts; it overwrites edits to those managed charts/layouts. Duplicate a dashboard before customizing it independently. See [DASHBOARD_GUIDE.md](DASHBOARD_GUIDE.md) for metric definitions and filters.
 
-### Executing dbt Transformations
-Navigate into the `dbt` directory and run:
+To provision clearly labeled **synthetic validation dashboards** against the smoke-test database instead of the real warehouse:
 
-```bash
-cd dbt
-
-# Build all seeds, models, and run tests
-dbt build
-
-# Or run models directly
-dbt run
-
-# Run only business data marts
-dbt run --select marts
+```powershell
+docker compose --env-file .env.compose --profile tools run --rm -e BI_DATABASE_NAME=nyc_taxi_test -e SUPERSET_ASSET_PREFIX=validation superset-assets
+docker compose --env-file .env.compose --profile tools run --rm --no-deps superset-assets python /app/verify_superset.py
 ```
 
-### Automated Execution via Airflow
-Log in to Airflow at `http://localhost:8080` and enable/trigger the DAG:
-```bash
-# Trigger the DAG via Airflow CLI inside container or local environment
-airflow dags trigger nyc_taxi_pipeline
+Run the smoke test below first. Validation pages use `/superset/dashboard/validation-overview/`, `validation-demand/` and `validation-routes/`, and display `Synthetic demo` in their titles. Their database is separate from the real warehouse. API verification checks 12 chart queries, the month filter and BI access restrictions; it does not perform screenshot/visual QA. Re-running warehouse tests can reset this disposable test data.
+
+## Data contracts and quality
+
+- **Grain:** one distinct canonical source record within a source month. `trip_id` is SHA-256 of the source month and all canonical source fields, not vendor/pickup/location alone. Exact canonical duplicates collapse in Silver and are counted in the report; Bronze preserves all original rows. TLC has no reliable individual trip ID, so identical real-world trips cannot be distinguished from duplicate records. Monetary fields normalize to two decimal places.
+- Each month is read separately. Missing required columns and unexpected new columns fail explicitly. `cbd_congestion_fee` is preserved for 2025+ and filled with zero for pre-2025 files.
+- Timestamps remain **NYC local wall-clock values** (`timestamp_ntz`); they are not asserted to be UTC instants. DST ambiguity in the published source cannot be reconstructed reliably.
+- The analytical population is positive-fare, positive-total trips with plausible distance/duration/speed. Refunds, zero fares, invalid locations, invalid timestamps and outliers go to quarantine; this is not a complete financial ledger. Null/zero passenger counts are retained as unknown.
+- `data/quality/YYYY-MM.json` records input, accepted, rejected and duplicate counts plus rejection reasons. Reason counts overlap when a row violates several rules. `input = accepted + rejected + duplicates`.
+- `data/quarantine/year=YYYY/month=MM` retains invalid rows and their reasons.
+- Location IDs 264/265 represent unknown/outside NYC and remain valid reference members.
+- Cash tips are not recorded by TLC. Card tip percentage is `100 * card_tips / card_fare`, not an estimate of cash tipping.
+
+## Safe monthly replacement
+
+Silver and Gold are written to temporary directories before replacing only the selected month. Filesystem publication is a local rename workflow, not an object-store ACID transaction. A process kill between renames can leave a hidden `.backup` directory; restore it before retrying if necessary.
+
+JDBC writes to a unique `load_stage` table first. The loader checks row count, unique IDs and month bounds, then replaces the warehouse month and updates `gold.load_manifest` in **one PostgreSQL transaction**. A failed insert rolls back the replacement. A hard-killed loader may leave an unused staging table; published data remains unchanged.
+
+Gold Parquet and PostgreSQL are separate publications: a failed warehouse load can leave newer Gold Parquet, while the last committed warehouse remains readable. Retry the same month to reconcile. BI reads only dbt marts.
+
+Facts and marts are incremental. Their selected-month delete and insert run in the same dbt model transaction, including records removed by a rerun. Other months remain intact. **The entire dbt build is not a cross-model transaction**: during a failed multi-model build, BI may briefly see different model versions; only consider the release complete after all tests pass. `dbt build --full-refresh` rebuilds all warehouse history, not just the selected months.
+
+Schemas: `gold` (validated warehouse source), `load_stage` (temporary writes), `reference` (zone seed), `staging` (views), `core` (facts/dimensions), `mart` (BI). `dim_time` contains 24 hours; `dim_date` contains one row per date.
+
+## Tests
+
+Tests use synthetic data and the separate `nyc_taxi_test` database; they do not reload your historical data.
+
+```powershell
+docker compose --env-file .env.compose run --rm -e RUN_WAREHOUSE_TESTS=1 airflow-scheduler bash -c 'pip install pytest==8.3.5 && python -m pytest -q tests'
 ```
 
-The DAG runs the end-to-end task sequence:
-1. `download_data_bronze`
-2. `spark_bronze_to_silver`
-3. `spark_silver_to_gold`
-4. `dbt_transform_marts`
+Coverage includes interrupted/failed downloads, worker error propagation, schema evolution, ID stability, rejected rows, monthly idempotence and PostgreSQL rollback. `dbt build` additionally runs key/relationship tests and reconciles every mart against fact counts/revenue and warehouse load manifests.
 
----
+For a complete small end-to-end verification (two synthetic months, then a rerun that removes a January trip while preserving December):
 
-## 📜 License
-Distributed under the MIT License.
+```powershell
+docker compose --env-file .env.compose run --rm -e DB_NAME=nyc_taxi_test -e TAXI_DATA_DIR=/tmp/taxi-smoke airflow-scheduler python -m tests.smoke_pipeline
+```
+
+This command resets schemas in **nyc_taxi_test only**. The smoke script refuses the normal warehouse and data directory.
+
+## Layout
+
+```text
+pipeline/           shared paths, month selection, Spark publication, warehouse loader
+ingestion/          atomic validated downloads
+spark/              month-local normalization, quarantine and enrichment
+dags/               parameterized sequential Airflow workflow
+dbt/models/         staging, core dimensions/fact and 8 monthly-grain marts
+dbt/seeds/          versioned 265-location reference
+infra/postgres/     initial databases, schemas and least-privilege BI role
+infra/superset/     configuration, initialization and dashboard provisioning
+tests/              regression and integration tests
+scripts/setup_env.py generated local secrets without modifying existing .env
+```
+
+Adjust resources and quality thresholds in `.env.compose`. Local Docker setup is intended for development/portfolio use. An internet-facing deployment needs TLS, a supported orchestrator/runtime upgrade plan, backups and environment-specific access controls.
+
+Official references: [Superset Docker images](https://superset.apache.org/admin-docs/installation/docker-builds/), [TLC data dictionary](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf).

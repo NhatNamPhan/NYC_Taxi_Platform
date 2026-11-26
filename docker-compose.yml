@@ -1,43 +1,144 @@
+name: nyc-taxi-platform
+
+x-airflow: &airflow
+  build: .
+  environment: &airflow-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:${AIRFLOW_DB_PASSWORD:?Run python scripts/setup_env.py}@postgres:5432/airflow
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY:?Run python scripts/setup_env.py}
+    AIRFLOW__WEBSERVER__SECRET_KEY: ${AIRFLOW_WEBSERVER_SECRET_KEY:?Run python scripts/setup_env.py}
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    AIRFLOW__CORE__PARALLELISM: '2'
+    AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG: '1'
+    AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
+    AIRFLOW__LOGGING__BASE_LOG_FOLDER: /opt/airflow/logs
+    DB_HOST: postgres
+    DB_PORT: '5432'
+    DB_NAME: nyc_taxi
+    DB_USER: nyc_pipeline
+    DB_PASSWORD: ${WAREHOUSE_PASSWORD:?Run python scripts/setup_env.py}
+    TAXI_DATA_DIR: /opt/airflow/data
+    PIPELINE_START_MONTH: ${PIPELINE_START_MONTH:-2025-01}
+    PIPELINE_END_MONTH: ${PIPELINE_END_MONTH:-2025-01}
+    SPARK_MASTER: ${SPARK_MASTER:-local[2]}
+    SPARK_DRIVER_MEMORY: ${SPARK_DRIVER_MEMORY:-2g}
+    SPARK_SHUFFLE_PARTITIONS: ${SPARK_SHUFFLE_PARTITIONS:-8}
+    JDBC_PARTITIONS: ${JDBC_PARTITIONS:-2}
+    MAX_SPEED_MPH: ${MAX_SPEED_MPH:-120}
+    MAX_DURATION_MIN: ${MAX_DURATION_MIN:-1440}
+  volumes:
+    - ./dags:/opt/airflow/dags:ro
+    - ./pipeline:/opt/airflow/pipeline:ro
+    - ./ingestion:/opt/airflow/ingestion:ro
+    - ./spark:/opt/airflow/spark:ro
+    - ./dbt:/opt/airflow/dbt
+    - ./tests:/opt/airflow/tests:ro
+    - ./pytest.ini:/opt/airflow/pytest.ini:ro
+    - ./data:/opt/airflow/data
+    - airflow_logs:/opt/airflow/logs
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+x-superset: &superset
+  build: ./infra/superset
+  environment: &superset-env
+    SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
+    SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY:?Run python scripts/setup_env.py}
+    SUPERSET_DB_PASSWORD: ${SUPERSET_DB_PASSWORD:?Run python scripts/setup_env.py}
+    SUPERSET_ADMIN_USERNAME: admin
+    SUPERSET_ADMIN_PASSWORD: ${SUPERSET_ADMIN_PASSWORD:?Run python scripts/setup_env.py}
+    BI_READER_PASSWORD: ${BI_READER_PASSWORD:?Run python scripts/setup_env.py}
+  volumes:
+    - ./infra/superset/superset_config.py:/app/pythonpath/superset_config.py:ro
+    - ./infra/superset/init.py:/app/init_platform.py:ro
+    - ./infra/superset/bootstrap.py:/app/bootstrap_platform.py:ro
+    - ./tests/verify_superset.py:/app/verify_superset.py:ro
+    - superset_home:/app/superset_home
+
 services:
-  airflow-webserver:
-    build: .
+  postgres:
+    image: postgres:15-alpine
     environment:
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:1234@host.docker.internal:5433/airflow
-      AIRFLOW__CORE__FERNET_KEY: '4YAJSGW9Nib78qJJaDjWTlxodK5sa_ddDtrwhGwB0d4='
-      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
-      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
-      DB_HOST: host.docker.internal
-      DB_PORT: 5433
-      DB_NAME: nyc_taxi
-      DB_USER: postgres
-      DB_PASSWORD: "1234"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python scripts/setup_env.py}
+      WAREHOUSE_PASSWORD: ${WAREHOUSE_PASSWORD:?Run python scripts/setup_env.py}
+      AIRFLOW_DB_PASSWORD: ${AIRFLOW_DB_PASSWORD:?Run python scripts/setup_env.py}
+      SUPERSET_DB_PASSWORD: ${SUPERSET_DB_PASSWORD:?Run python scripts/setup_env.py}
+      BI_READER_PASSWORD: ${BI_READER_PASSWORD:?Run python scripts/setup_env.py}
     ports:
-      - "127.0.0.1:8080:8080"
+      - '127.0.0.1:${WAREHOUSE_PORT:-5434}:5432'
     volumes:
-      - .:/opt/airflow
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/init.sh:/docker-entrypoint-initdb.d/10-platform.sh:ro
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U postgres -d nyc_taxi']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  airflow-init:
+    <<: *airflow
+    environment:
+      <<: *airflow-env
+      _AIRFLOW_DB_MIGRATE: 'true'
+      _AIRFLOW_WWW_USER_CREATE: 'true'
+      _AIRFLOW_WWW_USER_USERNAME: admin
+      _AIRFLOW_WWW_USER_PASSWORD: ${AIRFLOW_ADMIN_PASSWORD:?Run python scripts/setup_env.py}
+    command: version
+
+  airflow-webserver:
+    <<: *airflow
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    ports:
+      - '127.0.0.1:${AIRFLOW_PORT:-8080}:8080'
     command: webserver
+    healthcheck:
+      test: [CMD, curl, --fail, http://localhost:8080/health]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
 
   airflow-scheduler:
-    build: .
-    environment:
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:1234@host.docker.internal:5433/airflow
-      AIRFLOW__CORE__FERNET_KEY: '4YAJSGW9Nib78qJJaDjWTlxodK5sa_ddDtrwhGwB0d4='
-      DB_HOST: host.docker.internal
-      DB_PORT: 5433
-      DB_NAME: nyc_taxi
-      DB_USER: postgres
-      DB_PASSWORD: "1234"
-    volumes:
-      - .:/opt/airflow
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    <<: *airflow
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
     command: scheduler
 
-  metabase:
-    image: metabase/metabase
+  superset-init:
+    <<: *superset
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: [python, /app/init_platform.py]
+
+  superset:
+    <<: *superset
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
     ports:
-      - "127.0.0.1:3000:3000"
+      - '127.0.0.1:${SUPERSET_PORT:-8088}:8088'
+    healthcheck:
+      test: [CMD, curl, --fail, http://localhost:8088/health]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  superset-assets:
+    <<: *superset
+    profiles: [tools]
+    depends_on:
+      superset:
+        condition: service_healthy
+    command: [python, /app/bootstrap_platform.py]
+
+volumes:
+  postgres_data:
+  airflow_logs:
+  superset_home:

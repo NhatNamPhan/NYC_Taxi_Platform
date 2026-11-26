@@ -1,50 +1,41 @@
-from datetime import datetime, timedelta
+"""Manually select months; serialize writers and pass parameters as environment."""
+from datetime import timedelta
+import os
+import pendulum
 from airflow import DAG
+from airflow.models.param import Param
 from airflow.operators.bash import BashOperator
 
-# Cấu hình mặc định cho các task
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2026, 7, 21),
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=3),
-}
+ROOT = "/opt/airflow"
+MONTH_PATTERN = r"^20[0-9]{2}-(0[1-9]|1[0-2])$"
 
-# Khởi tạo DAG
 with DAG(
-    'nyc_taxi_pipeline',
-    default_args=default_args,
-    description='End-to-end batch ETL pipeline for NYC Yellow Taxi',
-    schedule_interval=None, # Chạy thủ công
+    "nyc_taxi_pipeline",
+    description="Monthly NYC taxi ingestion, quality checks, warehouse and dbt marts",
+    start_date=pendulum.datetime(2024, 1, 1, tz="America/New_York"),
+    schedule=None,
     catchup=False,
+    max_active_runs=1,
+    max_active_tasks=1,
+    default_args={"owner": "data-platform", "retries": 1, "retry_delay": timedelta(minutes=3),
+                  "execution_timeout": timedelta(hours=6)},
+    params={
+        "start_month": Param(os.getenv("PIPELINE_START_MONTH", "2025-01"), type="string", pattern=MONTH_PATTERN),
+        "end_month": Param(os.getenv("PIPELINE_END_MONTH", "2025-01"), type="string", pattern=MONTH_PATTERN),
+    },
+    tags=["nyc-taxi", "monthly", "quality"],
 ) as dag:
+    selected_months = {
+        "PIPELINE_START_MONTH": "{{ params.start_month }}",
+        "PIPELINE_END_MONTH": "{{ params.end_month }}",
+    }
 
-    # Task 1: Tải dữ liệu thô
-    download_data = BashOperator(
-        task_id='download_data_bronze',
-        bash_command='python /opt/airflow/ingestion/download_data.py',
-    )
+    def task(task_id, command):
+        return BashOperator(task_id=task_id, bash_command=command, cwd=ROOT,
+                            env=selected_months, append_env=True)
 
-    # Task 2: Làm sạch dữ liệu (Bronze -> Silver)
-    bronze_to_silver = BashOperator(
-        task_id='spark_bronze_to_silver',
-        bash_command='python /opt/airflow/spark/bronze_to_silver.py',
-    )
-
-    # Task 3: Làm giàu và nạp dữ liệu vào Postgres (Silver -> Gold)
-    silver_to_gold = BashOperator(
-        task_id='spark_silver_to_gold',
-        bash_command='python /opt/airflow/spark/silver_to_gold.py',
-    )
-
-    # Task 4: Chạy dbt build (nạp seeds và chuyển đổi các bảng Marts)
-    dbt_run = BashOperator(
-        task_id='dbt_transform_marts',
-        bash_command='cd /opt/airflow/dbt && dbt build --threads 4 --profiles-dir .',
-    )
-
-    # Định nghĩa luồng chạy tuần tự
-    download_data >> bronze_to_silver >> silver_to_gold >> dbt_run
+    download = task("download_data_bronze", "python -m ingestion.download_data")
+    silver = task("spark_bronze_to_silver", "python -m spark.bronze_to_silver")
+    gold = task("spark_silver_to_gold", "python -m spark.silver_to_gold")
+    dbt_build = task("dbt_transform_marts", "dbt build --project-dir /opt/airflow/dbt --profiles-dir /opt/airflow/dbt")
+    download >> silver >> gold >> dbt_build

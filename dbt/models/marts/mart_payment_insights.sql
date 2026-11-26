@@ -1,21 +1,11 @@
--- Mart model: mart_payment_insights
--- Phân tích doanh thu và hành vi tip theo phương thức thanh toán
-
-SELECT
-    CASE
-        WHEN t.payment_type = 1 THEN 'Credit Card'
-        WHEN t.payment_type = 2 THEN 'Cash'
-        WHEN t.payment_type = 3 THEN 'No Charge'
-        WHEN t.payment_type = 4 THEN 'Dispute'
+SELECT t.source_month AS month_start,
+    CASE t.payment_type
+        WHEN 0 THEN 'Flex Fare' WHEN 1 THEN 'Credit Card' WHEN 2 THEN 'Cash'
+        WHEN 3 THEN 'No Charge' WHEN 4 THEN 'Dispute' WHEN 6 THEN 'Voided'
         ELSE 'Unknown'
     END AS payment_method,
-    l.borough AS pickup_borough,
-    COUNT(*) AS total_trips,
-    ROUND(SUM(t.total_amount)::NUMERIC, 2) AS total_revenue,
-    ROUND(SUM(t.tip_amount)::NUMERIC, 2) AS total_tips,
-    ROUND(AVG(t.tip_percentage)::NUMERIC, 2) AS avg_tip_percentage,
-    ROUND(AVG(t.fare_amount)::NUMERIC, 2) AS avg_fare_amount
+    l.borough AS pickup_borough, {{ trip_metrics() }}
 FROM {{ ref('fact_trips') }} t
-LEFT JOIN {{ ref('dim_location') }} l on t.pickup_location_id = l.location_id
-GROUP BY 1, 2
-ORDER BY total_revenue DESC
+LEFT JOIN {{ ref('dim_location') }} l ON t.pickup_location_id = l.location_id
+WHERE {{ fact_month_filter() }}
+GROUP BY 1, 2, 3

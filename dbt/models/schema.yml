@@ -1,0 +1,50 @@
+version: 2
+seeds:
+  - name: taxi_zone_lookup
+    columns:
+      - name: LocationID
+        quote: true
+        data_tests: [unique, not_null]
+models:
+  - name: dim_location
+    columns:
+      - name: location_id
+        data_tests: [unique, not_null]
+  - name: dim_date
+    columns:
+      - name: date_id
+        data_tests: [unique, not_null]
+  - name: dim_time
+    columns:
+      - name: hour_id
+        data_tests: [unique, not_null]
+  - name: fact_trips
+    description: One distinct canonical TLC source record per source month; exact duplicates are collapsed in Silver.
+    columns:
+      - name: trip_id
+        data_tests: [unique, not_null]
+      - name: source_month
+        data_tests: [not_null]
+      - name: pickup_location_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_location')
+              field: location_id
+      - name: dropoff_location_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_location')
+              field: location_id
+      - name: pickup_date
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_id
+      - name: pickup_hour
+        data_tests:
+          - relationships:
+              to: ref('dim_time')
+              field: hour_id

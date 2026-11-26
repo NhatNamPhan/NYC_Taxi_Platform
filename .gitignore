@@ -2,6 +2,7 @@
 data/
 *.parquet
 *.csv
+!dbt/seeds/*.csv
 
 # Python environments and caches
 __pycache__/
@@ -12,6 +13,9 @@ env/
 .pytest_cache/
 .ipynb_checkpoints/
 .env
+.env.*
+!.env.example
+.runtime/
 
 # Logs and runtime artifacts
 logs/
